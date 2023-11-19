@@ -1,0 +1,1 @@
+/Users/danielvaughn/Code/matry/tree-sitter-matry/target/debug/libtree_sitter_matry.dylib: /Users/danielvaughn/Code/matry/tree-sitter-matry/bindings/rust/build.rs /Users/danielvaughn/Code/matry/tree-sitter-matry/bindings/rust/lib.rs /Users/danielvaughn/Code/matry/tree-sitter-matry/src/node-types.json /Users/danielvaughn/Code/matry/tree-sitter-matry/src/parser.c

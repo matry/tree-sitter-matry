@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "nan": "^2.18.0"
+    "ffi-napi": "^4.0.3",
+    "nan": "^2.18.0",
+    "tree-sitter": "^0.20.6"
   }
 }

@@ -1,0 +1,64 @@
+
+====
+component - color variant
+====
+
+component Button {
+  variants {
+    color my-bg: #007BFF
+  }
+}
+
+---
+
+(source_file
+  (component_block
+    (identifier)
+
+    (variants_block
+      (variant_declaration
+        (token_type)
+        (identifier)
+        (value
+          (color)
+        )
+      )
+    )
+  )
+)
+
+====
+component - switch variant
+====
+
+component Button {
+  variants {
+    color my-bg: #007BFF
+    switch size: small, medium*, large
+  }
+}
+
+---
+
+(source_file
+  (component_block
+    (identifier)
+
+    (variants_block
+      (variant_declaration
+        (token_type)
+        (identifier)
+        (value
+          (color)
+        )
+      )
+      (variant_declaration
+        (token_type)
+        (identifier)
+        (value
+          (arbitrary_text)
+        )
+      )
+    )
+  )
+)

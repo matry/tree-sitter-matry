@@ -1,0 +1,16 @@
+
+====
+component/misc - empty block
+====
+
+component Button {
+
+}
+
+---
+
+(source_file
+  (component_block
+    (identifier)
+  )
+)

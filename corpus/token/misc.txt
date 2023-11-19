@@ -1,0 +1,107 @@
+
+====
+token/misc - named block
+====
+
+tokens brand {
+  color brand-blue: #007BFF
+  asset brand-logo: /path/to/logo.svg
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (color)
+      )
+    )
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (url)
+      )
+    )
+  )
+)
+
+====
+token/misc - conditional block
+====
+
+tokens brand when $dark-mode is on {
+  color brand-blue: #007BFF
+  asset brand-logo: /path/to/logo.svg
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (conditional
+      (token_reference
+        (identifier)
+      )
+      (positive_assertion)
+      (keyword)
+    )
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (color)
+      )
+    )
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (url)
+      )
+    )
+  )
+)
+
+====
+token/misc - multiple
+====
+
+tokens {
+  text btn-text: Hello World
+  color primary-blue: #007BFF
+  asset brand-logo: /path/to/logo.svg
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (arbitrary_text)
+      )
+    )
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (color)
+      )
+    )
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (url)
+      )
+    )
+  )
+)

@@ -1,0 +1,8 @@
+
+component Button {
+  elements {
+    shape container {
+      text label
+    }
+  }
+}

@@ -12,6 +12,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "multi_line_comment"
+          },
+          {
+            "type": "SYMBOL",
             "name": "tokens_block"
           },
           {
@@ -21,6 +25,33 @@
           {
             "type": "SYMBOL",
             "name": "story_block"
+          }
+        ]
+      }
+    },
+    "single_line_comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\/\\/[^\\n]*"
+      }
+    },
+    "multi_line_comment": {
+      "type": "TOKEN",
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "STRING",
+            "value": "/*"
+          },
+          {
+            "type": "PATTERN",
+            "value": "[^*]*\\*+([^/*][^*]*\\*+)*"
+          },
+          {
+            "type": "STRING",
+            "value": "/"
           }
         ]
       }
@@ -37,9 +68,60 @@
       "type": "PATTERN",
       "value": "\\n+"
     },
+    "conditional": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "when"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "token_reference"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "positive_assertion"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "negative_assertion"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "keyword"
+            }
+          ]
+        }
+      ]
+    },
+    "positive_assertion": {
+      "type": "PATTERN",
+      "value": "is"
+    },
+    "negative_assertion": {
+      "type": "PATTERN",
+      "value": "is not"
+    },
     "value": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "SYMBOL",
+          "name": "color"
+        },
         {
           "type": "SYMBOL",
           "name": "dimension"
@@ -62,13 +144,13 @@
         }
       ]
     },
-    "single_line_comment": {
-      "type": "PATTERN",
-      "value": "\\/\\/[^\\n]*"
-    },
     "dimension": {
       "type": "PATTERN",
       "value": "[0-9]+(px|%|em|rem)?(\\s[0-9]+(px|%|em|rem)?)*\\s*"
+    },
+    "color": {
+      "type": "PATTERN",
+      "value": "\\#[0-9a-zA-Z]*"
     },
     "token_reference": {
       "type": "SEQ",
@@ -104,12 +186,78 @@
       "type": "PATTERN",
       "value": "[^\\n]*"
     },
+    "token_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "color"
+        },
+        {
+          "type": "STRING",
+          "value": "text"
+        },
+        {
+          "type": "STRING",
+          "value": "number"
+        },
+        {
+          "type": "STRING",
+          "value": "dimension"
+        },
+        {
+          "type": "STRING",
+          "value": "range"
+        },
+        {
+          "type": "STRING",
+          "value": "toggle"
+        },
+        {
+          "type": "STRING",
+          "value": "switch"
+        },
+        {
+          "type": "STRING",
+          "value": "asset"
+        }
+      ]
+    },
     "tokens_block": {
       "type": "SEQ",
       "members": [
         {
           "type": "STRING",
           "value": "tokens"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                },
+                {
+                  "type": "CHOICE",
+                  "members": [
+                    {
+                      "type": "SYMBOL",
+                      "name": "conditional"
+                    },
+                    {
+                      "type": "BLANK"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         },
         {
           "type": "STRING",
@@ -162,6 +310,10 @@
       "members": [
         {
           "type": "SYMBOL",
+          "name": "token_type"
+        },
+        {
+          "type": "SYMBOL",
           "name": "identifier"
         },
         {
@@ -201,6 +353,10 @@
               {
                 "type": "SYMBOL",
                 "name": "style_block"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "variants_block"
               }
             ]
           }
@@ -208,6 +364,110 @@
         {
           "type": "STRING",
           "value": "}"
+        }
+      ]
+    },
+    "variants_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "variants"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "variant_declaration"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "variant_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "token_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "value"
+        }
+      ]
+    },
+    "element_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "text"
+        },
+        {
+          "type": "STRING",
+          "value": "shape"
+        },
+        {
+          "type": "STRING",
+          "value": "image"
+        },
+        {
+          "type": "STRING",
+          "value": "video"
+        }
+      ]
+    },
+    "element_declaration": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "element_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": "{"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "element_declaration"
+                },
+                {
+                  "type": "STRING",
+                  "value": "}"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
         }
       ]
     },
@@ -225,25 +485,8 @@
         {
           "type": "REPEAT",
           "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "SYMBOL",
-                "name": "identifier"
-              },
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_newlines"
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "element_declaration"
           }
         },
         {
@@ -272,8 +515,25 @@
           "value": "style"
         },
         {
-          "type": "SYMBOL",
-          "name": "identifier"
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "identifier"
+            },
+            {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "conditional"
+                },
+                {
+                  "type": "BLANK"
+                }
+              ]
+            }
+          ]
         },
         {
           "type": "STRING",

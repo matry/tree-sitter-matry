@@ -1,0 +1,88 @@
+
+====
+token/types - color
+====
+
+tokens {
+  color primary-blue: #007BFF
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (color)
+      )
+    )
+  )
+)
+
+====
+token/types - asset
+====
+
+tokens {
+  asset logo: /path/to/logo.svg
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (url)
+      )
+    )
+  )
+)
+
+====
+token/types - switch
+====
+
+tokens {
+  switch size: small, medium*, large
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (arbitrary_text)
+      )
+    )
+  )
+)
+
+====
+token/types - toggle
+====
+
+tokens {
+  toggle dark-mode: off
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (value
+        (keyword)
+      )
+    )
+  )
+)

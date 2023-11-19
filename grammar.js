@@ -6,25 +6,44 @@ module.exports = grammar({
     source_file: $ => repeat(
       choice(
         $.single_line_comment,
+        $.multi_line_comment,
         $.tokens_block,
         $.component_block,
         $.story_block,
       ),
     ),
 
+    single_line_comment: $ => token(/\/\/[^\n]*/),
+    multi_line_comment: $ => token(seq(
+      '/*',
+      /[^*]*\*+([^/*][^*]*\*+)*/,
+      '/',
+    )),
     spaced_identifier: $ => /[a-zA-Z0-9\s]+/,
     identifier: $ => /[a-zA-Z0-9][a-zA-Z0-9_-]+/i,
     _newlines: $ => /\n+/,
+    conditional: $ => seq(
+      /when/,
+      $.token_reference,
+      choice(
+        $.positive_assertion,
+        $.negative_assertion,
+      ),
+      choice($.identifier, $.keyword),
+    ),
+    positive_assertion: $ => /is/,
+    negative_assertion: $ => /is not/,
     value: $ => choice(
+      $.color,
       $.dimension,
       $.token_reference,
       $.url,
       $.keyword,
       $.arbitrary_text,
     ),
-    single_line_comment: $ => /\/\/[^\n]*/,
 
     dimension: $ => /[0-9]+(px|%|em|rem)?(\s[0-9]+(px|%|em|rem)?)*\s*/,
+    color: $ => /\#[0-9a-zA-Z]*/,
     token_reference: $ => seq(
       '$',
       $.identifier
@@ -33,14 +52,31 @@ module.exports = grammar({
     keyword: $ => choice('on', 'off'),
     arbitrary_text: $ => /[^\n]*/,
 
+    token_type: $ => choice(
+      'color',
+      'text',
+      'number',
+      'dimension',
+      'range',
+      'toggle',
+      'switch',
+      'asset',
+    ),
     tokens_block: $ => seq(
       'tokens',
+      optional(
+        seq(
+          $.identifier,
+          optional($.conditional),
+        ),
+      ),
       '{',
       repeat(seq($.token_declaration, optional($._newlines))),
       '}',
       optional($._newlines),
     ),
     token_declaration: $ => seq(
+      $.token_type,
       $.identifier,
       ':', 
       $.value,
@@ -54,22 +90,52 @@ module.exports = grammar({
         choice(
           $.elements_block,
           $.style_block,
+          $.variants_block,
         ),
       ),
       '}',
     ),
 
+    variants_block: $ => seq(
+      'variants',
+      '{',
+      repeat($.variant_declaration),
+      '}',
+    ),
+    variant_declaration: $ => seq(
+      $.token_type,
+      $.identifier,
+      ':',
+      $.value,
+    ),
+
+    element_type: $ => choice(
+      'text',
+      'shape',
+      'image',
+      'video',
+    ),
+    element_declaration: $ => seq(
+      $.element_type,
+      $.identifier,
+      optional(
+        seq('{', $.element_declaration, '}')
+      ),
+    ),
     elements_block: $ => seq(
       'elements',
       '{',
-      repeat(seq($.identifier, optional($._newlines))),
+      repeat($.element_declaration),
       '}',
       optional($._newlines),
     ),
 
     style_block: $ => seq(
       'style',
-      $.identifier,
+      seq(
+        $.identifier,
+        optional($.conditional),
+      ),
       '{',
       repeat(seq($.style_declaration, optional($._newlines))),
       '}',
@@ -103,10 +169,6 @@ module.exports = grammar({
   },
 });
 
-
-    
-
-
     // kv_pair: $ => seq(
     //   '{',
     //   repeat(
@@ -131,19 +193,3 @@ module.exports = grammar({
     // dimension: $ => /[0-9]+(px|%|em|rem)?(\s[0-9]+(px|%|em|rem)?)*\s*/,
     // url: $ => /\/[a-zA-Z0-9\/\._-]+/,
     // arbitrary_text: $ => /[^\n]*/,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

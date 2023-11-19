@@ -1,8 +1,8 @@
 [package]
-name = "tree-sitter-MATRY"
-description = "MATRY grammar for the tree-sitter parsing library"
+name = "tree_sitter_matry"
+description = "Matry grammar for the tree-sitter parsing library"
 version = "0.0.1"
-keywords = ["incremental", "parsing", "MATRY"]
+keywords = ["incremental", "parsing", "matry"]
 categories = ["parsing", "text-editors"]
 repository = "https://github.com/tree-sitter/tree-sitter-MATRY"
 edition = "2018"
@@ -18,9 +18,15 @@ include = [
 
 [lib]
 path = "bindings/rust/lib.rs"
+crate-type = ["cdylib"]
 
 [dependencies]
 tree-sitter = "~0.20.10"
+matry_grammar = { path = "bindings/rust" }
 
 [build-dependencies]
 cc = "1.0"
+
+[[bin]]
+name = "tree-sitter-matry"
+path = "rust_src/main.rs"

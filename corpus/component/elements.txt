@@ -1,0 +1,30 @@
+
+====
+component - elements
+====
+
+component Button {
+  elements {
+    shape btn-container {
+      text label
+    }
+  }
+}
+
+---
+
+(source_file
+  (component_block
+    (identifier)
+    (elements_block
+      (element_declaration
+        (element_type)
+        (identifier)
+        (element_declaration
+          (element_type)
+          (identifier)
+        )
+      )
+    )
+  )
+)

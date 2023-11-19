@@ -18,9 +18,72 @@
         {
           "type": "style_block",
           "named": true
+        },
+        {
+          "type": "variants_block",
+          "named": true
         }
       ]
     }
+  },
+  {
+    "type": "conditional",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "keyword",
+          "named": true
+        },
+        {
+          "type": "negative_assertion",
+          "named": true
+        },
+        {
+          "type": "positive_assertion",
+          "named": true
+        },
+        {
+          "type": "token_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "element_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "element_declaration",
+          "named": true
+        },
+        {
+          "type": "element_type",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "element_type",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "elements_block",
@@ -31,7 +94,7 @@
       "required": false,
       "types": [
         {
-          "type": "identifier",
+          "type": "element_declaration",
           "named": true
         }
       ]
@@ -71,6 +134,10 @@
       "types": [
         {
           "type": "component_block",
+          "named": true
+        },
+        {
+          "type": "multi_line_comment",
           "named": true
         },
         {
@@ -116,6 +183,10 @@
       "required": true,
       "types": [
         {
+          "type": "conditional",
+          "named": true
+        },
+        {
           "type": "identifier",
           "named": true
         },
@@ -158,6 +229,10 @@
           "named": true
         },
         {
+          "type": "token_type",
+          "named": true
+        },
+        {
           "type": "value",
           "named": true
         }
@@ -180,6 +255,11 @@
     }
   },
   {
+    "type": "token_type",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "tokens_block",
     "named": true,
     "fields": {},
@@ -187,6 +267,14 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "conditional",
+          "named": true
+        },
+        {
+          "type": "identifier",
+          "named": true
+        },
         {
           "type": "token_declaration",
           "named": true
@@ -204,6 +292,10 @@
       "types": [
         {
           "type": "arbitrary_text",
+          "named": true
+        },
+        {
+          "type": "color",
           "named": true
         },
         {
@@ -226,6 +318,44 @@
     }
   },
   {
+    "type": "variant_declaration",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "token_type",
+          "named": true
+        },
+        {
+          "type": "value",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "variants_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "variant_declaration",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "$",
     "named": false
   },
@@ -238,12 +368,28 @@
     "named": true
   },
   {
+    "type": "asset",
+    "named": false
+  },
+  {
+    "type": "color",
+    "named": true
+  },
+  {
+    "type": "color",
+    "named": false
+  },
+  {
     "type": "component",
     "named": false
   },
   {
     "type": "dimension",
     "named": true
+  },
+  {
+    "type": "dimension",
+    "named": false
   },
   {
     "type": "elements",
@@ -258,6 +404,22 @@
     "named": true
   },
   {
+    "type": "image",
+    "named": false
+  },
+  {
+    "type": "multi_line_comment",
+    "named": true
+  },
+  {
+    "type": "negative_assertion",
+    "named": true
+  },
+  {
+    "type": "number",
+    "named": false
+  },
+  {
     "type": "off",
     "named": false
   },
@@ -266,7 +428,19 @@
     "named": false
   },
   {
+    "type": "positive_assertion",
+    "named": true
+  },
+  {
+    "type": "range",
+    "named": false
+  },
+  {
     "type": "render",
+    "named": false
+  },
+  {
+    "type": "shape",
     "named": false
   },
   {
@@ -286,12 +460,32 @@
     "named": false
   },
   {
+    "type": "switch",
+    "named": false
+  },
+  {
+    "type": "text",
+    "named": false
+  },
+  {
+    "type": "toggle",
+    "named": false
+  },
+  {
     "type": "tokens",
     "named": false
   },
   {
     "type": "url",
     "named": true
+  },
+  {
+    "type": "variants",
+    "named": false
+  },
+  {
+    "type": "video",
+    "named": false
   },
   {
     "type": "{",
