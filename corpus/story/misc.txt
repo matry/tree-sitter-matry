@@ -1,0 +1,16 @@
+
+====
+story/misc - empty block
+====
+
+story A button in several sizes {
+
+}
+
+---
+
+(source_file
+  (story_block
+    (spaced_identifier)
+  )
+)

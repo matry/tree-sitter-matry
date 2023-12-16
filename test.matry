@@ -1,8 +1,116 @@
 
+
+
+tokens
+  color primary-blue: #007BFF
+
+
+tokens
+  color primary-blue: #007BFF
+  composite some-shadow:
+    blur: 2px
+    offset: -1px
+    color: #007BFF
+
+tokens when $dark-mode is off
+  some-shadow:
+    color: #889333
+
+
+tokens branding
+  asset main-logo: /some/path/to/file.svg
+  text button-text: click me
+
+component Icon {
+  elements
+    shape icon
+
+  style icon
+    width: 20px
+    height: 20px
+    fill: orange
+}
+
+component Label {
+  elements
+    text label
+
+  style label
+    content: Click Me
+    box-shadow:
+      {
+        blur: 23px
+      }
+      {
+        blur: 43px
+      }
+    width: 230px
+}
+
 component Button {
   elements {
     shape container {
-      text label
+      Icon button-icon
+      Label button-label
     }
   }
+}
+
+
+
+
+component ListItem {
+  elements
+    shape container
+      text label
+}
+
+component List {
+  elements
+    shape container
+      ListItem item1
+      ListItem item2
+      ListItem item3
+}
+
+
+component List:
+  elements:
+    shape container:
+      text label:
+        image icon
+
+
+component popup {
+  properties
+    variant size: small, medium*, large
+
+
+  elements
+    shape wrapper
+      children items
+
+}
+
+
+frame a popup story
+  popup
+    children
+      Button
+        width: 200px
+        label: ok
+      Button
+        width: 100px
+        label: cancel
+
+
+
+// this is how we're going to "nest" elements. it'll be as simple as this. this means variant names cannot coincide with element names.
+story Some Buttons {
+  frame Some Button
+    Button
+      label: Click Me
+      shadow: 23px 34px #007BFF
+      icon
+        size: small
 }

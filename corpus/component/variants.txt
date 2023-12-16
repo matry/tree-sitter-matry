@@ -19,7 +19,7 @@ component Button {
       (variant_declaration
         (token_type)
         (identifier)
-        (value
+        (style_value
           (color)
         )
       )
@@ -48,14 +48,42 @@ component Button {
       (variant_declaration
         (token_type)
         (identifier)
-        (value
+        (style_value
           (color)
         )
       )
       (variant_declaration
         (token_type)
         (identifier)
-        (value
+        (style_value
+          (arbitrary_text)
+        )
+      )
+    )
+  )
+)
+
+====
+component - text variant
+====
+
+component Button {
+  variants {
+    text some-text: Hello World
+  }
+}
+
+---
+
+(source_file
+  (component_block
+    (identifier)
+
+    (variants_block
+      (variant_declaration
+        (token_type)
+        (identifier)
+        (style_value
           (arbitrary_text)
         )
       )

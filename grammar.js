@@ -33,7 +33,7 @@ module.exports = grammar({
     ),
     positive_assertion: $ => /is/,
     negative_assertion: $ => /is not/,
-    value: $ => choice(
+    style_value: $ => choice(
       $.color,
       $.dimension,
       $.token_reference,
@@ -79,7 +79,7 @@ module.exports = grammar({
       $.token_type,
       $.identifier,
       ':', 
-      $.value,
+      $.style_value,
     ),
 
     component_block: $ => seq(
@@ -106,7 +106,7 @@ module.exports = grammar({
       $.token_type,
       $.identifier,
       ':',
-      $.value,
+      $.style_value,
     ),
 
     element_type: $ => choice(
@@ -144,7 +144,7 @@ module.exports = grammar({
     style_declaration: $ => seq(
       $.identifier,
       ':',
-      $.value,
+      $.style_value,
     ),
 
     story_block: $ => seq(
@@ -160,36 +160,41 @@ module.exports = grammar({
       'frame',
       $.spaced_identifier,
       '{',
-      'render',
-      $.identifier,
+      $.frame_component,
       '}',
       optional($._newlines),
     ),
 
+    frame_component: $ => seq(
+      $.identifier,
+      '{',
+      repeat($.frame_rule),
+      '}',
+    ),
+    frame_rule: $ => seq(
+      $.identifier,
+      ':',
+      choice(
+        $.frame_component,
+        $.style_value,
+      ),
+    ),
+
+    frame_declaration: $ => seq(
+      seq($.identifier, '{'),
+      repeat(
+        seq(
+          $.identifier,
+          ':',
+          choice(
+            seq($.style_value, $._newlines),
+            $.frame_declaration,
+          ),
+          optional($._newlines),
+        ),
+      ),
+      '}',
+    ),
+
   },
 });
-
-    // kv_pair: $ => seq(
-    //   '{',
-    //   repeat(
-    //     seq(
-    //       $.key,
-    //       ':',
-    //       $.value,
-    //     ),
-    //   ),
-    //   '}',
-    // ),
-    // value: $ => choice(
-    //   $.list,
-    //   $.dimension,
-    //   $.url,
-    //   $.arbitrary_text,
-    // ),
-
-    // key: $ => /[a-zA-Z0-9]+/,
-    // _newlines: $ =>  /\n+/,
-
-    // dimension: $ => /[0-9]+(px|%|em|rem)?(\s[0-9]+(px|%|em|rem)?)*\s*/,
-    // url: $ => /\/[a-zA-Z0-9\/\._-]+/,
-    // arbitrary_text: $ => /[^\n]*/,
