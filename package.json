@@ -1,17 +1,19 @@
 {
   "name": "tree-sitter-matry",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.0.1",
+  "description": "matry grammar for tree-sitter",
   "main": "bindings/node",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "parsing",
+    "incremental"
+  ],
   "dependencies": {
-    "ffi-napi": "^4.0.3",
-    "nan": "^2.18.0",
-    "tree-sitter": "^0.20.6"
+    "nan": "^2.12.1"
+  },
+  "devDependencies": {
+    "tree-sitter-cli": "^0.20.8"
+  },
+  "scripts": {
+    "test": "tree-sitter test"
   }
 }
