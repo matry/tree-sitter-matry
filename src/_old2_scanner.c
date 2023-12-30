@@ -1,5 +1,10 @@
 #include <tree_sitter/parser.h>
 
+enum TokenType {
+  INDENT,
+  DEDENT
+};
+
 typedef struct {
   int indent_length;
 } Scanner;
