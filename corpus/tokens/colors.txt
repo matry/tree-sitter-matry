@@ -74,11 +74,68 @@ tokens {
 
 
 ===
+hex - 10 digits (invalid)
+===
+
+tokens {
+  color primary-red: #BADA55FF00
+}
+
+---
+
+(source_file
+  (ERROR
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+    (number)
+  )
+)
+
+
+
+===
 rgb
 ===
 
 tokens {
   color primary-red: rgb(255, 255, 30)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (rgb
+          (red_channel)
+          (green_channel)
+          (blue_channel)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+rgb - multiline
+===
+
+tokens {
+  color primary-red: rgb(
+    255,
+    255,
+    30
+  )
 }
 
 ---
@@ -158,33 +215,3 @@ tokens {
 )
 
 
-
-===
-rgb - multiline
-===
-
-tokens {
-  color primary-red: rgb(
-    255,
-    255,
-    30
-  )
-}
-
----
-
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (rgb
-          (red_channel)
-          (green_channel)
-          (blue_channel)
-        )
-      )
-    )
-  )
-)

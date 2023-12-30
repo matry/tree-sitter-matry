@@ -8,6 +8,7 @@ module.exports = grammar({
   Since it defines the root of any matry file, it belongs at the top.
   */
   rules: {
+
     source_file: $ => repeat(
       choice(
         $.tokens_block,
@@ -74,8 +75,15 @@ module.exports = grammar({
 
     dimensional_unit: $ => /(px|%|em|rem|in|pt|cm|mm|pc|ch|ex|vw|vh|vmin|vmax|dvh|dvw)/,
 
-    // TODO - this matches any number of alphanums, which is incorrect
-    hex: $ => /\#[0-9a-zA-Z]*/,
+    hex: $ => seq(
+      '#',
+      choice(
+        /[0-9a-fA-F]{3}/,
+        /[0-9a-fA-F]{4}/,
+        /[0-9a-fA-F]{6}/,
+        /[0-9a-fA-F]{8}/,
+      ),
+    ),
 
     identifier: $ => /[a-zA-Z][a-zA-Z0-9_-]+/i,
 
@@ -163,8 +171,8 @@ module.exports = grammar({
     ),
 
     token_value: $ => choice(
-      $.rgb,
       $.hex,
+      $.rgb,
       $.dimension,
       $.token_reference,
       $._string,
