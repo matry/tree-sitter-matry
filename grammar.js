@@ -2,6 +2,11 @@
 module.exports = grammar({
   name: 'matry',
 
+  /*
+  NOTE:
+  The following rules are arranged alphabetically, except for the source_file rule.
+  Since it defines the root of any matry file, it belongs at the top.
+  */
   rules: {
     source_file: $ => repeat(
       choice(
@@ -11,24 +16,14 @@ module.exports = grammar({
       ),
     ),
 
-    tokens_block: $ => seq(
-      'tokens',
-      optional($.identifier),
-      /\{/,
-      $._token_body,
-      /\}/,
-    ),
+    _newlines: $ => /\n+/,
 
-    // This is necessary because we don't want to capture the quotation marks themselves
-    string: $ => /[^\\n^"]*/,
+    // This weirdness is necessary so that we don't capture the quotes themselves in the AST
     _string: $ => seq(
       /"/,
       $.string,
       /"/,
     ),
-
-    identifier: $ => /[a-zA-Z][a-zA-Z0-9_-]+/i,
-    ref_identifier: $ => /[a-zA-Z][a-zA-Z0-9_.-]+/i,
 
     _token_body: $ => repeat1(
       choice(
@@ -42,6 +37,8 @@ module.exports = grammar({
     ),
 
     asset_path: $ => /\/[a-zA-Z0-9\/\._-]+/,
+
+    asterisk: $ => '*',
 
     child_token_block: $ => seq(
       $.identifier,
@@ -68,59 +65,16 @@ module.exports = grammar({
       '}',
     ),
 
-    token_reference: $ => seq(
-      '$',
-      $.ref_identifier,
-    ),
-
-    _newlines: $ => /\n+/,
-
-    token_type: $ => choice(
-      'text',
-      'color',
-      'asset',
-      'switch',
-      'dimension',
-      'range',
-    ),
-
-    token_declaration: $ => seq(
-      $.token_type,
-      $.identifier,
-      ':',
-      $.token_value,
-    ),
-
-    token_assignment: $ => seq(
-      $.identifier,
-      ':',
-      $.token_value,
-    ),
-
-    token_value: $ => choice(
-      $.dimension,
-      $.hex,
-      $.token_reference,
-      $._string,
-      $.asset_path,
-      $.switch,
-    ),
-
-    positive_assertion: $ => /is/,
-    negative_assertion: $ => /is not/,
-
-    hex: $ => /\#[0-9a-zA-Z]*/,
-
     dimension: $ => seq(
       $.number,
       optional($.dimensional_unit),
     ),
 
-    number: $ => /-?\d+(\.\d+)?/,
-
     dimensional_unit: $ => /(px|%|em|rem|in|pt|cm|mm|pc|ch|ex|vw|vh|vmin|vmax|dvh|dvw)/,
 
-    single_line_comment: $ => token(/\/\/[^\n]*/),
+    hex: $ => /\#[0-9a-zA-Z]*/,
+
+    identifier: $ => /[a-zA-Z][a-zA-Z0-9_-]+/i,
 
     multi_line_comment: $ => token(seq(
       '/*',
@@ -128,7 +82,17 @@ module.exports = grammar({
       '/',
     )),
 
-    asterisk: $ => '*',
+    negative_assertion: $ => /is not/,
+
+    number: $ => /-?\d+(\.\d+)?/,
+
+    positive_assertion: $ => /is/,
+
+    ref_identifier: $ => /[a-zA-Z][a-zA-Z0-9_.-]+/i,
+
+    single_line_comment: $ => token(/\/\/[^\n]*/),
+
+    string: $ => /[^\\n^"]*/,
 
     switch: $ => seq(
       seq(
@@ -144,212 +108,49 @@ module.exports = grammar({
       ),
     ),
 
-    // _statement: $ => choice(
-    //   $.single_line_comment,
-    //   $.block,
-    // ),
+    token_assignment: $ => seq(
+      $.identifier,
+      ':',
+      $.token_value,
+    ),
 
-    // block: $ => seq(
-    //   $.identifier,
-    //   repeat($._statement),
-    // ),
+    tokens_block: $ => seq(
+      'tokens',
+      optional($.identifier),
+      /\{/,
+      $._token_body,
+      /\}/,
+    ),
 
-    // single_line_comment: $ => token(/\/\/[^\n]*/),
-    // identifier: $ => /[a-zA-Z0-9][a-zA-Z0-9_-]+/i,
+    token_declaration: $ => seq(
+      $.token_type,
+      $.identifier,
+      ':',
+      $.token_value,
+    ),
 
-    // LEGACY
-    // source_file: $ => repeat(
-    //   choice(
-    //     $.single_line_comment,
-    //     $.multi_line_comment,
-    //     $.tokens_block,
-    //     $.component_block,
-    //     $.story_block,
-    //   ),
-    // ),
+    token_reference: $ => seq(
+      '$',
+      $.ref_identifier,
+    ),
 
-    // single_line_comment: $ => token(/\/\/[^\n]*/),
-    // multi_line_comment: $ => token(seq(
-    //   '/*',
-    //   /[^*]*\*+([^/*][^*]*\*+)*/,
-    //   '/',
-    // )),
-    // spaced_identifier: $ => /[a-zA-Z0-9\s]+/,
-    // identifier: $ => /[a-zA-Z0-9][a-zA-Z0-9_-]+/i,
-    // _newlines: $ => /\n+/,
-    // conditional: $ => seq(
-    //   /when/,
-    //   $.token_reference,
-    //   choice(
-    //     $.positive_assertion,
-    //     $.negative_assertion,
-    //   ),
-    //   choice($.identifier, $.keyword),
-    // ),
-    // positive_assertion: $ => /is/,
-    // negative_assertion: $ => /is not/,
-    // style_value: $ => choice(
-    //   $.color,
-    //   $.dimension,
-    //   $.token_reference,
-    //   $.url,
-    //   $.keyword,
-    //   $.arbitrary_text,
-    // ),
+    token_type: $ => choice(
+      'text',
+      'color',
+      'asset',
+      'switch',
+      'dimension',
+      'range',
+    ),
 
-    // dimension: $ => /[0-9]+(px|%|em|rem)?(\s[0-9]+(px|%|em|rem)?)*\s*/,
-    // color: $ => /\#[0-9a-zA-Z]*/,
-    // token_reference: $ => seq(
-    //   '$',
-    //   $.identifier
-    // ),
-    // url: $ => /\/[a-zA-Z0-9\/\._-]+/,
-    // keyword: $ => choice('on', 'off'),
-    // arbitrary_text: $ => /[^\n]*/,
-
-    // token_type: $ => choice(
-    //   'color',
-    //   'text',
-    //   'number',
-    //   'dimension',
-    //   'range',
-    //   'toggle',
-    //   'switch',
-    //   'asset',
-    // ),
-    // tokens_block: $ => seq(
-    //   'tokens',
-    //   optional(
-    //     seq(
-    //       $.identifier,
-    //       optional($.conditional),
-    //     ),
-    //   ),
-    //   '{',
-    //   repeat(seq($.token_declaration, optional($._newlines))),
-    //   '}',
-    //   optional($._newlines),
-    // ),
-    // token_declaration: $ => seq(
-    //   $.token_type,
-    //   $.identifier,
-    //   ':', 
-    //   $.style_value,
-    // ),
-
-    // component_block: $ => seq(
-    //   'component',
-    //   $.identifier,
-    //   '{',
-    //   repeat(
-    //     choice(
-    //       $.elements_block,
-    //       $.style_block,
-    //       $.variants_block,
-    //     ),
-    //   ),
-    //   '}',
-    // ),
-
-    // variants_block: $ => seq(
-    //   'variants',
-    //   '{',
-    //   repeat($.variant_declaration),
-    //   '}',
-    // ),
-    // variant_declaration: $ => seq(
-    //   $.token_type,
-    //   $.identifier,
-    //   ':',
-    //   $.style_value,
-    // ),
-
-    // element_type: $ => choice(
-    //   'text',
-    //   'shape',
-    //   'image',
-    //   'video',
-    // ),
-    // element_declaration: $ => seq(
-    //   $.element_type,
-    //   $.identifier,
-    //   optional(
-    //     seq('{', $.element_declaration, '}')
-    //   ),
-    // ),
-    // elements_block: $ => seq(
-    //   'elements',
-    //   '{',
-    //   repeat($.element_declaration),
-    //   '}',
-    //   optional($._newlines),
-    // ),
-
-    // style_block: $ => seq(
-    //   'style',
-    //   seq(
-    //     $.identifier,
-    //     optional($.conditional),
-    //   ),
-    //   '{',
-    //   repeat(seq($.style_declaration, optional($._newlines))),
-    //   '}',
-    //   optional($._newlines),
-    // ),
-    // style_declaration: $ => seq(
-    //   $.identifier,
-    //   ':',
-    //   $.style_value,
-    // ),
-
-    // story_block: $ => seq(
-    //   'story',
-    //   $.spaced_identifier,
-    //   '{',
-    //   repeat($.frame_block),
-    //   '}',
-    //   optional($._newlines),
-    // ),
-
-    // frame_block: $ => seq(
-    //   'frame',
-    //   $.spaced_identifier,
-    //   '{',
-    //   $.frame_component,
-    //   '}',
-    //   optional($._newlines),
-    // ),
-
-    // frame_component: $ => seq(
-    //   $.identifier,
-    //   '{',
-    //   repeat($.frame_rule),
-    //   '}',
-    // ),
-    // frame_rule: $ => seq(
-    //   $.identifier,
-    //   ':',
-    //   choice(
-    //     $.frame_component,
-    //     $.style_value,
-    //   ),
-    // ),
-
-    // frame_declaration: $ => seq(
-    //   seq($.identifier, '{'),
-    //   repeat(
-    //     seq(
-    //       $.identifier,
-    //       ':',
-    //       choice(
-    //         seq($.style_value, $._newlines),
-    //         $.frame_declaration,
-    //       ),
-    //       optional($._newlines),
-    //     ),
-    //   ),
-    //   '}',
-    // ),
+    token_value: $ => choice(
+      $.dimension,
+      $.hex,
+      $.token_reference,
+      $._string,
+      $.asset_path,
+      $.switch,
+    ),
 
   },
 });
