@@ -65,13 +65,16 @@ module.exports = grammar({
       '}',
     ),
 
+    decimal_range: $ => /(0(\.\d+)?|1(\.0+)?)/,
+
     dimension: $ => seq(
       $.number,
-      optional($.dimensional_unit),
+      $.dimensional_unit,
     ),
 
     dimensional_unit: $ => /(px|%|em|rem|in|pt|cm|mm|pc|ch|ex|vw|vh|vmin|vmax|dvh|dvw)/,
 
+    // TODO - this matches any number of alphanums, which is incorrect
     hex: $ => /\#[0-9a-zA-Z]*/,
 
     identifier: $ => /[a-zA-Z][a-zA-Z0-9_-]+/i,
@@ -89,6 +92,22 @@ module.exports = grammar({
     positive_assertion: $ => /is/,
 
     ref_identifier: $ => /[a-zA-Z][a-zA-Z0-9_.-]+/i,
+
+    rgb: $ => seq(
+      /rgba?\s*(\()/,
+      alias($.number, $.red_channel),
+      ',',
+      alias($.number, $.green_channel),
+      ',',
+      alias($.number, $.blue_channel),
+      optional(
+        seq(
+          ',',
+          alias($.decimal_range, $.alpha_channel),
+        ),
+      ),
+      ')',
+    ),
 
     single_line_comment: $ => token(/\/\/[^\n]*/),
 
@@ -144,8 +163,9 @@ module.exports = grammar({
     ),
 
     token_value: $ => choice(
-      $.dimension,
+      $.rgb,
       $.hex,
+      $.dimension,
       $.token_reference,
       $._string,
       $.asset_path,

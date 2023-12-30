@@ -2,11 +2,11 @@
 
 
 ===
-pixel dimension
+hex - 3 digits
 ===
 
 tokens {
-  dimension font-size: 24px
+  color primary-red: #F00
 }
 
 ---
@@ -17,9 +17,82 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (dimension
-          (number)
-          (dimensional_unit)
+        (hex)
+      )
+    )
+  )
+)
+
+
+
+===
+hex - 6 digits
+===
+
+tokens {
+  color primary-red: #BADA55
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+  )
+)
+
+
+
+===
+hex - 8 digits
+===
+
+tokens {
+  color primary-red: #BADA55FF
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+  )
+)
+
+
+
+===
+rgb
+===
+
+tokens {
+  color primary-red: rgb(255, 255, 30)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (rgb
+          (red_channel)
+          (green_channel)
+          (blue_channel)
         )
       )
     )
@@ -29,11 +102,11 @@ tokens {
 
 
 ===
-percent dimension
+rgba - fully opaque
 ===
 
 tokens {
-  dimension shadow-opacity: 75%
+  color primary-red: rgba(255, 255, 30, 1)
 }
 
 ---
@@ -44,9 +117,11 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (dimension
-          (number)
-          (dimensional_unit)
+        (rgb
+          (red_channel)
+          (green_channel)
+          (blue_channel)
+          (alpha_channel)
         )
       )
     )
@@ -56,11 +131,11 @@ tokens {
 
 
 ===
-text
+rgba - translucent
 ===
 
 tokens {
-  text button-copy: "Click me"
+  color primary-red: rgba(255, 255, 30, 0.5)
 }
 
 ---
@@ -71,58 +146,11 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (string)
-      )
-    )
-  )
-)
-
-
-===
-asset
-===
-
-tokens {
-  asset logo: /images/logo.svg
-}
-
----
-
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (asset_path)
-      )
-    )
-  )
-)
-
-
-
-===
-switch
-===
-
-tokens {
-  switch size: small, medium*, large
-}
-
----
-
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (switch
-          (identifier)
-          (identifier)
-          (asterisk)
-          (identifier)
+        (rgb
+          (red_channel)
+          (green_channel)
+          (blue_channel)
+          (alpha_channel)
         )
       )
     )
@@ -132,48 +160,31 @@ tokens {
 
 
 ===
-switch with one option
+rgb - multiline
 ===
 
 tokens {
-  switch size: small
-}
-
----
-
-(source_file
-  (ERROR
-    (token_type)
-    (identifier)
-    (identifier)
+  color primary-red: rgb(
+    255,
+    255,
+    30
   )
-)
-
-
-
-====
-token reference
-====
-
-tokens branding {
-  color secondary-color: $branding.primary
 }
 
 ---
 
 (source_file
   (tokens_block
-    (identifier)
     (token_declaration
       (token_type)
       (identifier)
       (token_value
-        (token_reference
-          (ref_identifier)
+        (rgb
+          (red_channel)
+          (green_channel)
+          (blue_channel)
         )
       )
     )
   )
 )
-
-

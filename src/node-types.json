@@ -77,6 +77,33 @@
     }
   },
   {
+    "type": "rgb",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "alpha_channel",
+          "named": true
+        },
+        {
+          "type": "blue_channel",
+          "named": true
+        },
+        {
+          "type": "green_channel",
+          "named": true
+        },
+        {
+          "type": "red_channel",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "source_file",
     "named": true,
     "fields": {},
@@ -201,6 +228,10 @@
           "named": true
         },
         {
+          "type": "rgb",
+          "named": true
+        },
+        {
           "type": "string",
           "named": true
         },
@@ -247,12 +278,20 @@
     "named": false
   },
   {
+    "type": ")",
+    "named": false
+  },
+  {
     "type": ",",
     "named": false
   },
   {
     "type": ":",
     "named": false
+  },
+  {
+    "type": "alpha_channel",
+    "named": true
   },
   {
     "type": "asset",
@@ -267,6 +306,10 @@
     "named": true
   },
   {
+    "type": "blue_channel",
+    "named": true
+  },
+  {
     "type": "color",
     "named": false
   },
@@ -276,6 +319,10 @@
   },
   {
     "type": "dimensional_unit",
+    "named": true
+  },
+  {
+    "type": "green_channel",
     "named": true
   },
   {
@@ -305,6 +352,10 @@
   {
     "type": "range",
     "named": false
+  },
+  {
+    "type": "red_channel",
+    "named": true
   },
   {
     "type": "ref_identifier",

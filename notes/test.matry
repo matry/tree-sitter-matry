@@ -449,3 +449,17 @@ This would likely only be used when authoring.
 render {
   theme: dark-mode
 }
+
+/*
+
+Playing with intricate color logic.
+In this example, I'm constructing a color from another color, but the green channel is reduced by half.
+
+*/
+tokens {
+  color primary-red: rgb(
+    $.some-other-value.r,
+    $.some-other-value.g / 2,
+    255,
+  )
+}
