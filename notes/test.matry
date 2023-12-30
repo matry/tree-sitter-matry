@@ -1,0 +1,451 @@
+
+/*
+
+This file is for me to play around with syntax ideas.
+It is a collection of random, stream-of-consciousness experiments.
+It is NOT documentation.
+
+*/
+
+// top-level unnamed token block
+tokens {
+  color primary-blue: #007BFF
+  text button-copy: "click me"
+  asset logo: /assets/images/logo.svg
+}
+
+// top-level named token block
+tokens branding {
+  color secondary: rgb(23, 45, 67)
+  switch size: small, medium*, large
+}
+
+// block with nested block(s)
+tokens branding {
+  typography {
+    dimension default-body-size: 16px
+  }
+
+  images {
+    asset logo: /assets/logo.png
+  }
+}
+
+// variant block with single-line conditional syntax
+tokens {
+  switch dark-mode: on, off*
+}
+tokens branding {
+  color primary: #007
+
+  when $dark-mode is on {
+    primary: #DDD
+  }
+}
+
+// variant block with multi-line conditional syntax
+tokens branding {
+  dimension body-font-size: 12px
+
+  when $zoom {
+    is small {
+      body-font-size: 8px
+    }
+    is medium {
+      body-font-size: 12px
+    }
+    is large {
+      body-font-size: 20px
+    }
+  }
+}
+
+// referencing a nested token
+tokens branding {
+  font {
+    dimension body-size: 12px
+  }
+}
+tokens overrides {
+  dimension large-body-size: $branding.font.body-size * 1.5
+}
+
+// complex operations
+tokens branding {
+  dimension large-body-size: (34px + 22px) - ($default-body-size * 2)
+}
+
+// COLOR OPERATIONS
+
+// option 1
+tokens branding {
+  color primary: #007
+  color secondary: saturate (lighten $branding.primary by 25%) by 50%
+}
+
+// option 2
+tokens branding {
+  color primary: #007
+  color secondary: $branding.primary (lighten by 25%, saturate by 50%)
+}
+
+// option 3
+tokens branding {
+  color primary: #007
+  color secondary: ($branding.primary + 25%L) - 50%S
+}
+
+// option 4
+tokens branding {
+  color primary: #007
+  color secondary: #BFF
+  color tertiary: rgb(
+    $branding.primary.r + 10%,
+    $branding.primary.g,
+    $branding.primary.b,
+  )
+}
+
+/*
+
+indentation-aware syntax
+I personally love this, the fewer characters designers have to write, the better.
+I don't love the parsing difficulty - tree-sitter doesn't allow it out of the box, so I need to implement a custom scanner in C.
+Another thing I don't love is that designers may find it difficult to ensure their indentation levels are correct.
+With shallow nesting it's easy, but could get very unwieldy with more depth.
+However, that difficult could be a forcing function to keep nesting shallow.
+
+*/
+
+
+tokens
+  color primary-blue: #007BFF
+
+// playing around with a "composite" token type
+tokens
+  color primary-blue: #007BFF
+
+  composite some-shadow
+    blur: 2px
+    offset: -1px
+    color: #007BFF
+
+// top-level conditional statement
+tokens when $dark-mode is off
+  some-shadow:
+    color: #889333
+
+tokens branding
+  asset main-logo: /some/path/to/file.svg
+  text button-text: click me
+
+// component syntax
+component Icon
+  elements
+    shape icon
+
+  style icon
+    width: 20px
+    height: 20px
+    // should we allow named colors? def makes it easy to play with but it's not cross-platform
+    fill: orange
+
+/*
+
+Here I'm playing with an optional curly brace syntax.
+I love the freedom, but the rules become ambiguous.
+If they use a curly brace, can they ignore indentation when inside the braces, or no?
+This could lead to some extremely-difficult-to-parse scenarios.
+Also, curly braces are virtually mandatory in scenarios where you need a list of dictionaries (see below).
+I can't see a way to let designers specify multiple shadows, for instance, without curly braces.
+
+*/
+component Label {
+  elements
+    text label
+
+  style label
+    content: Click Me
+    box-shadow:
+      {
+        blur: 23px
+      }
+      {
+        blur: 43px
+      }
+    width: 230px
+}
+
+/*
+
+Here I'm wondering about how to compose components.
+In this scenario, the Icon and Label elements are components that the user has specified elsewhere.
+
+It feels weird to mix lowercase and uppercase element types.
+It does, however, make it very clear which are system components vs which are user-defined.
+
+*/
+component Button {
+  elements {
+    shape container {
+      Icon button-icon
+      Label button-label
+    }
+  }
+}
+
+/*
+
+Here I'm wondering about how to compose iterations like unordered and ordered lists.
+In this case you have a ListItem that is nested inside a List.
+
+The question is...is this static?
+Can it be updated in a story or in a component that uses List?
+I think in this scenario, no - the items are set.
+
+We need a way to explicitly define holes in the component hierarchy.
+
+*/
+component ListItem {
+  elements {
+    shape container {
+      text label
+    }
+  }
+}
+component List {
+  elements {
+    shape container {
+      ListItem item1
+      ListItem item2
+      ListItem item3
+    }
+  }
+}
+
+// Playing with a pythonic syntax. I don't like this.
+component List:
+  elements:
+    shape container:
+      text label:
+        image icon
+
+// I thought about separating out the properties by type. I don't like this.
+component Button {
+  variants {
+    size: small, medium, large*
+  }
+
+  colors {
+    primary: blue
+  }
+}
+
+/*
+
+I thought about calling "variants" "properties" instead.
+Then the word "variant" would refer to the switch style type.
+This probably makes more sense to designers.
+
+Another reason is that for the system components...
+- shape
+- text
+- image
+
+Attributes such as "width" or "font-size" are called "properties".
+So it makes more sense to call them that at the component level.
+
+*/
+component Button {
+  properties {
+    variant size: small, medium*, large
+  }
+}
+
+/*
+
+This is how holes could be defined.
+A "hole" allows a component author to nest elements inside of a child element.
+Think of something like a popup.
+A popup component might define the "shell", but doesn't care about what's rendered inside of it.
+Components therefore need a way to allow consumers to nest elements inside it.
+
+I don't think it's easily readable - let me explain the syntax.
+
+1. To allow a single element to be nested inside your component, use the "child" keyword
+2. To allow multiple elements to be nested inside your component, use the "children" keyword
+3. Therefore the children and child elements effectively become special properties that allow nesting components
+4. It also means all holes are named, which is clean and easy
+5. Any element you define inside it becomes the default rendered element if no elements are passed in
+
+#3 is what concerns me a bit.
+It will ease the authoring experience, but it comes with tradeoffs:
+- it violates a principle of matry, which is that the element structure of a component cannot change
+- it requires implicit knowledge of how this works, and could be unintuitive for users
+- it introduces styling code that will never be used in production, which is inelegent
+
+*/
+component popup {
+  elements {
+    child header {
+      Header default-header
+    }
+    children items {
+      ListItem sample-item-1
+      ListItem sample-item-2
+    }
+  }
+}
+
+/*
+
+Continuing from the previous example, this is how the popup component could be used in a story.
+You can see that we're replacing the default-header and sample-item-n elements with our own.
+
+*/
+frame "a popup story" {
+  popup {
+    header {
+      Label {
+        content: "Confirm"
+      }
+    }
+    items {
+      Button {
+        width: 200px
+        label: "yes"
+      }
+      Button {
+        width: 100px
+        label: "no"
+      }
+    }
+  }
+}
+
+/*
+
+This is how I'd like to compose components.
+Pretty simple, though it means variant names cannot coincide with element names.
+
+*/
+
+story Some Buttons {
+  frame Some Button {
+    Button {
+      label: Click Me
+      shadow: 23px 34px #007BFF
+      icon {
+        size: small
+      }
+    }
+  }
+}
+
+// here is how it would look with curly braces
+story Some Buttons {
+  frame some button {
+    Button {
+      label: click me
+      shadow: 23px
+      icon {
+        size: small
+      }
+    }
+  }
+}
+
+/*
+
+Playing with a public/private keyword to denote which tokens are local to a component vs which are global.
+I'm not a fan of this syntax.
+
+*/
+public tokens {
+  switch theme: dark-mode, light-mode*
+}
+
+/*
+
+In previous iterations, the "when" keyword always came after the block identifier:
+
+  style some-element when $theme is dark-mode {
+    ...
+  }
+
+But I'm beginning to think that the "when" keyword should itself be a block identifier.
+This makes it easier to parse and also easier to read, IMO.
+
+Below are two variations, one for single-line declarations, and another for multi-line.
+
+*/
+tokens branding {
+  color primary-blue: #123
+
+  when $theme is dark-mode {
+    primary-blue: #abc
+  }
+}
+tokens branding {
+  color primary-blue: #123
+
+  when $theme {
+    is dark-mode {
+      primary-blue: #abc
+    }
+  }
+}
+
+/*
+
+When it comes to nesting, how should conditional statements work?
+Is it possible to override an entire group of tokens?
+
+This variation is flexible because it allows you to nest groups inside conditional blocks.
+
+*/
+tokens branding {
+  typography {
+    dimension body-font-size: 14px
+  }
+
+  when $theme is dark-mode {
+    typography {
+      body-font-size: 16px
+    }
+  }
+}
+
+/*
+
+Continuing from the previous example.
+I like this variation a bit more, even though it's more strict.
+It prevents designers from shooting themselves in the foot with complexity.
+
+In this example, you can only override a group when inside that group.
+In other words, token groups cannot be nested inside conditional blocks.
+This enforces LOB - locality of behavior.
+But it could also force designers to come up with hacky solutions to achieve the functionality they need.
+
+*/
+tokens {
+  branding {
+    typography {
+      dimension body-font-size: 14px
+
+      when $theme is dark-mode {
+        body-font-size: 16px
+      }
+    }
+  }
+}
+
+/*
+
+Here I was playing around with a syntax for rendering from the top-level.
+This would likely only be used when authoring.
+
+*/
+render {
+  theme: dark-mode
+}

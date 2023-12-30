@@ -1,0 +1,68 @@
+
+
+
+====
+positive assertion
+====
+
+tokens branding {
+  when $dark-mode is on {
+    primary: #A55
+  }
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (conditional_token_block
+      (token_reference
+        (ref_identifier)
+      )
+      (positive_assertion)
+      (identifier)
+      (token_assignment
+        (identifier)
+        (token_value
+          (hex)
+        )
+      )
+    )
+  )
+)
+
+
+
+====
+negative assertion
+====
+
+tokens branding {
+  when $dark-mode is not on {
+    primary: #A55
+  }
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (conditional_token_block
+      (token_reference
+        (ref_identifier)
+      )
+      (negative_assertion)
+      (identifier)
+      (token_assignment
+        (identifier)
+        (token_value
+          (hex)
+        )
+      )
+    )
+  )
+)
+
+

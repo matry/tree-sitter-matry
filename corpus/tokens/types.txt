@@ -1,0 +1,204 @@
+
+
+
+===
+pixel dimension
+===
+
+tokens {
+  dimension font-size: 24px
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (dimension
+          (number)
+          (dimensional_unit)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+percent dimension
+===
+
+tokens {
+  dimension shadow-opacity: 75%
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (dimension
+          (number)
+          (dimensional_unit)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+text
+===
+
+tokens {
+  text button-copy: "Click me"
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (string)
+      )
+    )
+  )
+)
+
+
+
+===
+hex color
+===
+
+tokens {
+  color primary-red: #F00
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+  )
+)
+
+
+
+===
+asset
+===
+
+tokens {
+  asset logo: /images/logo.svg
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (asset_path)
+      )
+    )
+  )
+)
+
+
+
+===
+switch
+===
+
+tokens {
+  switch size: small, medium*, large
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (switch
+          (identifier)
+          (identifier)
+          (asterisk)
+          (identifier)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+switch with one option
+===
+
+tokens {
+  switch size: small
+}
+
+---
+
+(source_file
+  (ERROR
+    (token_type)
+    (identifier)
+    (identifier)
+  )
+)
+
+
+
+====
+token reference
+====
+
+tokens branding {
+  color secondary-color: $branding.primary
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (token_reference
+          (ref_identifier)
+        )
+      )
+    )
+  )
+)
+
+

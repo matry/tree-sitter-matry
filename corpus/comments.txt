@@ -1,9 +1,9 @@
 
-===
-comments - single-line
-===
+====
+single-line comments
+====
 
-// this is a comment
+// hello this is a comment
 
 ---
 
@@ -12,16 +12,12 @@ comments - single-line
 )
 
 ===
-comments - multi-line
+multi-line comments
 ===
 
 /*
 
-this
-is
-a
-multiline
-comment
+This is a multi-line comment
 
 */
 

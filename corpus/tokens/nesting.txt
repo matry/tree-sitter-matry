@@ -1,0 +1,162 @@
+
+
+====
+single layer
+====
+
+tokens branding {
+  color blue: #007
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+  )
+)
+
+
+====
+child blocks
+====
+
+tokens branding {
+  text btn-text: "Click me"
+
+  colors {
+    color primary-color: #BAD
+  }
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (string)
+      )
+    )
+    (child_token_block
+      (identifier)
+      (token_declaration
+        (token_type)
+        (identifier)
+        (token_value
+          (hex)
+        )
+      )
+    )
+  )
+)
+
+
+
+====
+deeply nesting child blocks
+====
+
+tokens branding {
+  text btn-text: "Click me"
+
+  colors {
+    reds {
+      color primary-red: #F00
+    }
+    blues {
+      color primary-blue: #0F0
+    }
+  }
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (string)
+      )
+    )
+    (child_token_block
+      (identifier)
+      (child_token_block
+        (identifier)
+        (token_declaration
+          (token_type)
+          (identifier)
+          (token_value
+            (hex)
+          )
+        )
+      )
+      (child_token_block
+        (identifier)
+        (token_declaration
+          (token_type)
+          (identifier)
+          (token_value
+            (hex)
+          )
+        )
+      )
+    )
+  )
+)
+
+
+
+====
+multiple tokens per block
+====
+
+tokens branding {
+  color primary-color: #BAD
+  color secondary-color: #A55
+  color tertiary-color: #ADD
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+  )
+)
+
+

@@ -26,3 +26,11 @@ All tests are located in `/corpus`.
 
 1. Run the tests: `tree-sitter test`
 2. Run a particular test: `tree-sitter test -f 'Your test name'`
+
+## Building
+
+Matry is intended to be exported as a WASM module.
+
+1. Run the build command: `tree-sitter build-wasm`
+2. You should see a new `tree-sitter-matry.wasm` file in the root directory - do NOT commit this file.
+3. Copy it into your project and use according to general WASM documentation.
