@@ -129,6 +129,22 @@ module.exports = grammar({
 
     number: $ => /-?\d+(\.\d+)?/,
 
+    oklab: $ => seq(
+      /oklaba?\s*(\()/,
+      alias($.decimal_range, $.lightness_channel),
+      ',',
+      alias($.decimal_range, $.a_channel),
+      ',',
+      alias($.decimal_range, $.b_channel),
+      optional(
+        seq(
+          ',',
+          alias($.decimal_range, $.alpha_channel),
+        ),
+      ),
+      ')',
+    ),
+
     positive_assertion: $ => /is/,
 
     ref_identifier: $ => /[a-zA-Z][a-zA-Z0-9_.-]+/i,
@@ -207,6 +223,7 @@ module.exports = grammar({
       $.rgb,
       $.hsl,
       $.hsv,
+      $.oklab,
       $.dimension,
       $.token_reference,
       $._string,

@@ -136,6 +136,33 @@
     }
   },
   {
+    "type": "oklab",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "a_channel",
+          "named": true
+        },
+        {
+          "type": "alpha_channel",
+          "named": true
+        },
+        {
+          "type": "b_channel",
+          "named": true
+        },
+        {
+          "type": "lightness_channel",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "rgb",
     "named": true,
     "fields": {},
@@ -295,6 +322,10 @@
           "named": true
         },
         {
+          "type": "oklab",
+          "named": true
+        },
+        {
           "type": "rgb",
           "named": true
         },
@@ -361,6 +392,10 @@
     "named": false
   },
   {
+    "type": "a_channel",
+    "named": true
+  },
+  {
     "type": "alpha_channel",
     "named": true
   },
@@ -374,6 +409,10 @@
   },
   {
     "type": "asterisk",
+    "named": true
+  },
+  {
+    "type": "b_channel",
     "named": true
   },
   {

@@ -1,0 +1,120 @@
+
+
+
+===
+oklab
+===
+
+tokens {
+  color primary-red: oklab(0, 0.5, 1)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (oklab
+          (lightness_channel)
+          (a_channel)
+          (b_channel)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+oklab - multiline
+===
+
+tokens {
+  color primary-red: oklab(
+    0.1,
+    1,
+    0
+  )
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (oklab
+          (lightness_channel)
+          (a_channel)
+          (b_channel)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+oklaba - fully opaque
+===
+
+tokens {
+  color primary-red: oklaba(0, 0.5, 0.7, 1)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (oklab
+          (lightness_channel)
+          (a_channel)
+          (b_channel)
+          (alpha_channel)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+oklaba - translucent
+===
+
+tokens {
+  color primary-red: oklaba(0.5, 1, 0.2, 0.5)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (oklab
+          (lightness_channel)
+          (a_channel)
+          (b_channel)
+          (alpha_channel)
+        )
+      )
+    )
+  )
+)
+
+
