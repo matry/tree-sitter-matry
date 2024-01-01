@@ -459,6 +459,80 @@
         }
       ]
     },
+    "p3": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "p3\\s*(\\()"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "red_channel"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "green_channel"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "blue_channel"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "decimal_range"
+                  },
+                  "named": true,
+                  "value": "alpha_channel"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
     "positive_assertion": {
       "type": "PATTERN",
       "value": "is"
@@ -737,6 +811,10 @@
         {
           "type": "SYMBOL",
           "name": "hsv"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "p3"
         },
         {
           "type": "SYMBOL",

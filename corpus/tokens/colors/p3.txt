@@ -1,0 +1,120 @@
+
+
+
+===
+p3
+===
+
+tokens {
+  color primary-red: p3(0, 1, 0.5)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (p3
+          (red_channel)
+          (green_channel)
+          (blue_channel)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+p3 - multiline
+===
+
+tokens {
+  color primary-red: p3(
+    0.25,
+    0.5,
+    0.65
+  )
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (p3
+          (red_channel)
+          (green_channel)
+          (blue_channel)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+p3 - fully opaque
+===
+
+tokens {
+  color primary-red: p3(0.5, 1, 0.75, 1)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (p3
+          (red_channel)
+          (green_channel)
+          (blue_channel)
+          (alpha_channel)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+p3 - translucent
+===
+
+tokens {
+  color primary-red: p3(1.0, 0.4, 0, 0.5)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (p3
+          (red_channel)
+          (green_channel)
+          (blue_channel)
+          (alpha_channel)
+        )
+      )
+    )
+  )
+)
+
+

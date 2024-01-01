@@ -163,6 +163,33 @@
     }
   },
   {
+    "type": "p3",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "alpha_channel",
+          "named": true
+        },
+        {
+          "type": "blue_channel",
+          "named": true
+        },
+        {
+          "type": "green_channel",
+          "named": true
+        },
+        {
+          "type": "red_channel",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "rgb",
     "named": true,
     "fields": {},
@@ -323,6 +350,10 @@
         },
         {
           "type": "oklab",
+          "named": true
+        },
+        {
+          "type": "p3",
           "named": true
         },
         {

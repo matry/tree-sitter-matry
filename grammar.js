@@ -145,6 +145,22 @@ module.exports = grammar({
       ')',
     ),
 
+    p3: $ => seq(
+      /p3\s*(\()/,
+      alias($.decimal_range, $.red_channel),
+      ',',
+      alias($.decimal_range, $.green_channel),
+      ',',
+      alias($.decimal_range, $.blue_channel),
+      optional(
+        seq(
+          ',',
+          alias($.decimal_range, $.alpha_channel),
+        ),
+      ),
+      ')',
+    ),
+
     positive_assertion: $ => /is/,
 
     ref_identifier: $ => /[a-zA-Z][a-zA-Z0-9_.-]+/i,
@@ -223,6 +239,7 @@ module.exports = grammar({
       $.rgb,
       $.hsl,
       $.hsv,
+      $.p3,
       $.oklab,
       $.dimension,
       $.token_reference,
