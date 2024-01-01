@@ -1,0 +1,99 @@
+
+
+
+===
+hex - 3 digits
+===
+
+tokens {
+  color primary-red: #F00
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+  )
+)
+
+
+
+===
+hex - 6 digits
+===
+
+tokens {
+  color primary-red: #BADA55
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+  )
+)
+
+
+
+===
+hex - 8 digits
+===
+
+tokens {
+  color primary-red: #BADA55FF
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+  )
+)
+
+
+
+===
+hex - 10 digits (invalid)
+===
+
+tokens {
+  color primary-red: #BADA55FF00
+}
+
+---
+
+(source_file
+  (ERROR
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hex)
+      )
+    )
+    (number)
+  )
+)
+
+
