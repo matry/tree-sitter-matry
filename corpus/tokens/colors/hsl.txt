@@ -1,0 +1,30 @@
+
+
+
+===
+hsl
+===
+
+tokens {
+  color primary-red: hsl(360, 100, 100)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hsl
+          (hue_channel)
+          (saturation_channel)
+          (lightness_channel)
+        )
+      )
+    )
+  )
+)
+
+

@@ -1,7 +1,7 @@
 {
   "name": "tree-sitter-matry",
   "version": "0.0.1",
-  "description": "matry grammar for tree-sitter",
+  "description": "The tree-sitter grammar for the Matry language",
   "main": "bindings/node",
   "keywords": [
     "parsing",

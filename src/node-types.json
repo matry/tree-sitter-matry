@@ -82,6 +82,33 @@
     "fields": {}
   },
   {
+    "type": "hsl",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "alpha_channel",
+          "named": true
+        },
+        {
+          "type": "hue_channel",
+          "named": true
+        },
+        {
+          "type": "lightness_channel",
+          "named": true
+        },
+        {
+          "type": "saturation_channel",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "rgb",
     "named": true,
     "fields": {},
@@ -233,6 +260,10 @@
           "named": true
         },
         {
+          "type": "hsl",
+          "named": true
+        },
+        {
           "type": "rgb",
           "named": true
         },
@@ -335,7 +366,15 @@
     "named": true
   },
   {
+    "type": "hue_channel",
+    "named": true
+  },
+  {
     "type": "identifier",
+    "named": true
+  },
+  {
+    "type": "lightness_channel",
     "named": true
   },
   {
@@ -364,6 +403,10 @@
   },
   {
     "type": "ref_identifier",
+    "named": true
+  },
+  {
+    "type": "saturation_channel",
     "named": true
   },
   {
