@@ -28,3 +28,91 @@ tokens {
 )
 
 
+
+===
+hsl - multiline
+===
+
+tokens {
+  color primary-red: hsl(
+    360, 100, 100
+  )
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hsl
+          (hue_channel)
+          (saturation_channel)
+          (lightness_channel)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+hsla - fully opaque
+===
+
+tokens {
+  color primary-red: hsla(360, 100, 100, 1)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hsl
+          (hue_channel)
+          (saturation_channel)
+          (lightness_channel)
+          (alpha_channel)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+hsla - translucent
+===
+
+tokens {
+  color primary-red: hsla(360, 100, 100, 0.5)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hsl
+          (hue_channel)
+          (saturation_channel)
+          (lightness_channel)
+          (alpha_channel)
+        )
+      )
+    )
+  )
+)
+
+
