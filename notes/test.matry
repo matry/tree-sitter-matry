@@ -581,7 +581,7 @@ In both cases it can reduce manual effort to provide a generative syntax.
 
 /*
 
-Variation 1
+Variation -1
 
 In this variation, we're introducing a `produce` keyword that declares it's own top-level block.
 The allowed keys within this block depend on the type of asset being produced.
@@ -619,7 +619,7 @@ produce $favicon {
 */
 
 /*
-Variation 2 - `generate` keyword
+Variation 0 - `generate` keyword
 
 The below code would generate 10 colors, dark purple to light purple, along the hsl color space.
 The names would be:
@@ -640,6 +640,38 @@ generate 10 color {
   from: hsl(255, 90, 45)
   to: hsl(255, 90, 75)
 }
+
+// variation 1
+generate color {
+  naming: "purple-0"
+  sequence: interpolate-hsl
+  from: hsl(255, 90, 45)
+  to: hsl(255, 90, 75)
+  steps: 10
+}
+
+// variation 2
+color... {
+  name: "purple-0"
+  sequence: interpolate-hsl
+  from: hsl(255, 90, 45)
+  to: hsl(255, 90, 72)
+  steps: 10
+}
+
+/*
+both would produce:
+  purple-0: hsl(255, 90, 45)
+  purple-1: hsl(255, 90, 48)
+  purple-2: hsl(255, 90, 51)
+  purple-3: hsl(255, 90, 54)
+  purple-4: hsl(255, 90, 57)
+  purple-5: hsl(255, 90, 60)
+  purple-6: hsl(255, 90, 63)
+  purple-7: hsl(255, 90, 66)
+  purple-8: hsl(255, 90, 69)
+  purple-9: hsl(255, 90, 72)
+*/
 
 // variation 3, using the golden ratio as the scalar value
 dimension... {
