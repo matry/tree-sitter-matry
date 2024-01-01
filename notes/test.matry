@@ -75,6 +75,41 @@ tokens branding {
   dimension large-body-size: (34px + 22px) - ($default-body-size * 2)
 }
 
+/*
+
+ASSETS
+
+I'm considering a design approach where Everything Is An Asset.
+At an abstract level, an asset is simply data that can be retrieved from another file.
+The type of data almost doesn't matter, though in certain scenarios it definitely does matter.
+
+In order to perform certain operations, it's important to know the asset type.
+For instance, we'd like to perform scaling and non-destructive graphical transforms on images,
+but this would only be applicable to jpeg/png/etc.
+While if you wanted to generate a bunch of svg's with a set of colors,
+you'd need to control the `currentcolor` attribute and therefore would require the file type to be svg.
+
+*/
+
+/*
+
+Variation 1 - optional file format postfix with a dot separator
+
+One thing I don't like about this is that it's repetitive.
+It may make some things easier for me at parse time.
+The big question is whether I can always rely on the file extension to give me the information I need.
+
+*/
+// with dot syntax
+tokens {
+  asset.svg logo: /assets/logo.svg
+}
+// function expression syntax
+tokens {
+  asset(svg) logo: /assets/logo.svg
+}
+
+
 // COLOR OPERATIONS
 
 // option 1
@@ -531,3 +566,239 @@ Just a thought.
 */
 
 
+/*
+
+I'm playing with an idea called "productions."
+A production is a set of programmatically generated values.
+
+Some use cases:
+  - a designer needs to specify a range of dimensional pixel values, like for spacing or font sizes
+  - a designer needs to take an original image and generate many different sizes, like for a favicon
+
+In both cases it can reduce manual effort to provide a generative syntax.
+
+*/
+
+/*
+
+Variation 1
+
+In this variation, we're introducing a `produce` keyword that declares it's own top-level block.
+The allowed keys within this block depend on the type of asset being produced.
+
+*/
+tokens {
+  asset.svg favicon: /assets/favicon.ico
+}
+
+produce $favicon {
+  small {
+    width: 20px
+    height: 20px
+  }
+  medium {
+    width: 100px
+    height: 100px
+  }
+  large {
+    width: 200px
+    height: 200px
+  }
+}
+/*
+
+^ results in
+
+- dist/
+  - matry.yaml
+  - assets/
+    - favicon-small.ico
+    - favicon-medium.ico
+    - favicon-large.ico
+
+*/
+
+/*
+Variation 2 - `generate` keyword
+
+The below code would generate 10 colors, dark purple to light purple, along the hsl color space.
+The names would be:
+  - purple-0
+  - purple-1
+  - purple-2
+  - purple-3
+  - purple-4
+  - purple-5
+  - purple-6
+  - purple-7
+  - purple-8
+  - purple-9
+*/
+generate 10 color {
+  name: "purple-0"
+  sequence: interpolate-hsl
+  from: hsl(255, 90, 45)
+  to: hsl(255, 90, 75)
+}
+
+// variation 3, using the golden ratio as the scalar value
+dimension... {
+  name: "spacing-a"
+  scale: 1.618
+  from: 1rem
+  steps: 7
+}
+/*
+The above code would generate the following:
+  - spacing-a: 1rem
+  - spacing-b: 1.618rem
+  - spacing-b: 2.618rem
+  - spacing-c: 4.236rem
+  - spacing-d: 6.854rem
+  - spacing-e: 11.089rem
+  - spacing-f: 17.942rem
+*/
+
+/*
+
+Composite values
+
+Composites handle complex style types that are non-atomic.
+In CSS, these are composed using positional arguments:
+
+margin: 1px 2px 3px 4px;
+^ top, right, bottom, left
+
+We could go with the same approach, or we could go with keyword arguments.
+The former requires far fewer characters, but doesn't scale very well.
+
+For instance, in CSS it's possible to specify multiple box shadows, each of which is a composite type.
+It looks like this:
+
+box-shadow:
+  inset 0 -3em 3em rgba(0, 200, 0, 0.3),
+  0 0 0 2px white,
+  0.3em 0.3em 1em rgba(200, 0, 0, 0.6);
+
+*/
+
+// To contrast this approach, here's what the equivalent would look like with the latter keyword argument approach:
+shadow {
+  {
+    position: inset
+    x: 0
+    y: 0
+    blur: -3em
+    spread: 3em
+    color: rgb(0, 200, 0, 0.3)
+  }
+  {
+    position: inset
+    x: 0
+    y: 0
+    blur: -3em
+    spread: 3em
+    color: rgb(0, 200, 0, 0.3)
+  }
+}
+
+/*
+While this approach is indeed a lot more text, it's also more obvious what it's doing.
+This approach also gives us a unique ability to name the shadows, so we could do something like:
+*/
+
+
+shadow {
+  bottom-shadow {
+    position: inner
+    x: 0
+    y: 0
+    blur: -3em
+    spread: 3em
+    color: rgb(0, 200, 0, 0.3)
+  }
+  top-shadow {
+    position: outer
+    x: 0
+    y: 0
+    blur: -3em
+    spread: 3em
+    color: rgb(0, 200, 0, 0.3)
+  }
+}
+
+// ...and then later we could do this within a conditional style block
+when $some-token is some-value {
+  elem {
+    shadow.base-shadow.color: #007
+  }
+}
+
+/*
+At this point I'm getting a bit lost in the weeds on how I'm using the dot character.
+I want to be sure it's very clear what the dot means.
+In most cases I'm using it to infer to some kind of attribute/member/property reference.
+
+Such as...
+*/
+
+// token reference (in this case an attribute of the "branding" token group)
+{
+  color: $branding.primary-red
+}
+
+// asset type (this is under discussion and may not be implemented)
+tokens {
+  asset.png hero-background: /assets/hero.png
+}
+
+// composite token reference
+tokens {
+  composite body-font {
+    
+  }
+}
+
+/*
+
+How do we declare our own composite tokens vs using ones that are pre-defined?
+Inevitably we will have both.
+
+When we declare a composite token...is this like a prototype?
+Are we creating "instances" of the composites?
+No...no we're not.
+A composite token is merely a token group that can be directly referred to in a style, so long as it matches the same structure.
+
+Ugh this^ is weird. I don't like this.
+It's implict and will be difficult for designers to wrap their heads around.
+It also doesn't abide by the LOB principle.
+
+Maybe composites...can't be created as tokens?
+Maybe all tokens must be atomic?
+And maybe token groups could fulfill the same function that composites were intended to fill?
+
+This may be the first real distinction I've encountered between tokens and style values.
+Because a component style value may indeed be composite, by its nature.
+But for a token to be composite, it must assume a certain structure, and it must dictate that structure.
+
+A composite is therefore not just grouping tokens together, but actually creating it's own *type* of token.
+Because any style value that references the composite token must itself be a composite of the same schema.
+
+If we go down this path, we are expecting designers to think of schematic design.
+We are indeed already doing that, but this feels like a level of granularity that we don't want,
+and I'm not sure the juice is worth the squeeze.
+
+One of the guiding principles behind matry was that tokens are platform-agnostic.
+So any relationship, implicit or otherwise, between the structure of a token and the structure of a style value, would violate this principle.
+Because inevitably there will be composite structures that are unique to a specific styling language or paradigm.
+
+*/
+
+/*
+
+Given the above, I'm starting to wonder how composites come about.
+Since particular styles are composite, then it must be defined as part of a dialect.
+So what does a dialect look like?
+How is it defined?
+
+*/
