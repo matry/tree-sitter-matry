@@ -101,6 +101,22 @@ module.exports = grammar({
       ')',
     ),
 
+    hsv: $ => seq(
+      /hsva?\s*(\()/,
+      alias($.number, $.hue_channel),
+      ',',
+      alias($.number, $.saturation_channel),
+      ',',
+      alias($.number, $.value_channel),
+      optional(
+        seq(
+          ',',
+          alias($.decimal_range, $.alpha_channel),
+        ),
+      ),
+      ')',
+    ),
+
     identifier: $ => /[a-zA-Z][a-zA-Z0-9_-]+/i,
 
     multi_line_comment: $ => token(seq(
@@ -190,6 +206,7 @@ module.exports = grammar({
       $.hex,
       $.rgb,
       $.hsl,
+      $.hsv,
       $.dimension,
       $.token_reference,
       $._string,

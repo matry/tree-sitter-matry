@@ -109,6 +109,33 @@
     }
   },
   {
+    "type": "hsv",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "alpha_channel",
+          "named": true
+        },
+        {
+          "type": "hue_channel",
+          "named": true
+        },
+        {
+          "type": "saturation_channel",
+          "named": true
+        },
+        {
+          "type": "value_channel",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "rgb",
     "named": true,
     "fields": {},
@@ -261,6 +288,10 @@
         },
         {
           "type": "hsl",
+          "named": true
+        },
+        {
+          "type": "hsv",
           "named": true
         },
         {
@@ -428,6 +459,10 @@
   {
     "type": "tokens",
     "named": false
+  },
+  {
+    "type": "value_channel",
+    "named": true
   },
   {
     "type": "when",
