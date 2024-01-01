@@ -463,3 +463,71 @@ tokens {
     255,
   )
 }
+
+tokens {
+  // saturate
+  color primary-red: saturate($base-red, 25%)
+  // desaturate, variation 1
+  color primary-red: saturate($base-red, -10%)
+  // desaturate, variation 2
+  color primary-red: desaturate($base-red, 10%)
+  // mix (this needs work as it's not specific enough - there are lots of ways to "mix" colors)
+  color primary-purple: mix($primary-red, $primary-blue)
+}
+
+
+/*
+
+I'm thinking about module management - how to include other's work in your own project?
+At the root of any Matry project should be a "matry file" - a file literally called `matry`.
+It should be able to support yaml, json, toml, as well as no file extension at all.
+In this file we declare the modules we want to include.
+Each Matry project defines it's own namespace, regardless of whether it's ever shared as a module.
+
+*/
+
+// matry.yaml
+include:
+  some-lib 2.1.0
+
+// how do we prevent naming collisions? some ideas...
+
+/*
+Variation 1: similar syntax as in c-based languages
+*/
+using Icon from some-lib
+
+/*
+Variation 2: introduce a `call` keyword, as in "let's call the X component from Y library something else. how about 'Z'"
+*/
+call some-lib.Icon SomeIcon
+
+/*
+Variation 3: no import syntax at all, include the namespace at the component level
+*/
+component Button {
+  elements {
+    shape btn-container {
+      some-lib.Icon btn-icon
+    }
+  }
+}
+
+/*
+Variation 4: introduce a `rename` keyword, allowing module components to be redefined as a component-level token
+*/
+component Button {
+  tokens {
+    rename some-lib.Icon BtnIcon
+  }
+}
+
+/*
+
+SIDE NOTE - it's possible to sidestep the entire question of module management.
+The alternative is to simply provide an easy way for users to share their projects publicly, and make copy/paste super easy.
+Just a thought.
+
+*/
+
+
