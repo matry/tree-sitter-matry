@@ -1,5 +1,32 @@
 [
   {
+    "type": "a98rgb",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "alpha_channel",
+          "named": true
+        },
+        {
+          "type": "blue_channel",
+          "named": true
+        },
+        {
+          "type": "green_channel",
+          "named": true
+        },
+        {
+          "type": "red_channel",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "child_token_block",
     "named": true,
     "fields": {},
@@ -190,6 +217,33 @@
     }
   },
   {
+    "type": "rec2020",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "alpha_channel",
+          "named": true
+        },
+        {
+          "type": "blue_channel",
+          "named": true
+        },
+        {
+          "type": "green_channel",
+          "named": true
+        },
+        {
+          "type": "red_channel",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "rgb",
     "named": true,
     "fields": {},
@@ -329,6 +383,10 @@
       "required": true,
       "types": [
         {
+          "type": "a98rgb",
+          "named": true
+        },
+        {
           "type": "asset_path",
           "named": true
         },
@@ -354,6 +412,10 @@
         },
         {
           "type": "p3",
+          "named": true
+        },
+        {
+          "type": "rec2020",
           "named": true
         },
         {

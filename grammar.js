@@ -37,6 +37,22 @@ module.exports = grammar({
       ),
     ),
 
+    a98rgb: $ => seq(
+      /a98rgb\s*(\()/,
+      alias($.decimal_range, $.red_channel),
+      ',',
+      alias($.decimal_range, $.green_channel),
+      ',',
+      alias($.decimal_range, $.blue_channel),
+      optional(
+        seq(
+          ',',
+          alias($.decimal_range, $.alpha_channel),
+        ),
+      ),
+      ')',
+    ),
+
     asset_path: $ => /\/[a-zA-Z0-9\/\._-]+/,
 
     asterisk: $ => '*',
@@ -86,7 +102,7 @@ module.exports = grammar({
     ),
 
     hsl: $ => seq(
-      /hsla?\s*(\()/,
+      /hsl\s*(\()/,
       alias($.number, $.hue_channel),
       ',',
       alias($.number, $.saturation_channel),
@@ -163,10 +179,26 @@ module.exports = grammar({
 
     positive_assertion: $ => /is/,
 
+    rec2020: $ => seq(
+      /rec2020\s*(\()/,
+      alias($.decimal_range, $.red_channel),
+      ',',
+      alias($.decimal_range, $.green_channel),
+      ',',
+      alias($.decimal_range, $.blue_channel),
+      optional(
+        seq(
+          ',',
+          alias($.decimal_range, $.alpha_channel),
+        ),
+      ),
+      ')',
+    ),
+
     ref_identifier: $ => /[a-zA-Z][a-zA-Z0-9_.-]+/i,
 
     rgb: $ => seq(
-      /rgba?\s*(\()/,
+      /rgb\s*(\()/,
       alias($.number, $.red_channel),
       ',',
       alias($.number, $.green_channel),
@@ -240,6 +272,8 @@ module.exports = grammar({
       $.hsl,
       $.hsv,
       $.p3,
+      $.a98rgb,
+      $.rec2020,
       $.oklab,
       $.dimension,
       $.token_reference,

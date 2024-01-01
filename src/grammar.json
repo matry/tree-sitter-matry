@@ -71,6 +71,80 @@
         ]
       }
     },
+    "a98rgb": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "a98rgb\\s*(\\()"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "red_channel"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "green_channel"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "blue_channel"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "decimal_range"
+                  },
+                  "named": true,
+                  "value": "alpha_channel"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
     "asset_path": {
       "type": "PATTERN",
       "value": "\\/[a-zA-Z0-9\\/\\._-]+"
@@ -210,7 +284,7 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "hsla?\\s*(\\()"
+          "value": "hsl\\s*(\\()"
         },
         {
           "type": "ALIAS",
@@ -537,6 +611,80 @@
       "type": "PATTERN",
       "value": "is"
     },
+    "rec2020": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "rec2020\\s*(\\()"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "red_channel"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "green_channel"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "blue_channel"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "decimal_range"
+                  },
+                  "named": true,
+                  "value": "alpha_channel"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
     "ref_identifier": {
       "type": "PATTERN",
       "value": "[a-zA-Z][a-zA-Z0-9_.-]+"
@@ -546,7 +694,7 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "rgba?\\s*(\\()"
+          "value": "rgb\\s*(\\()"
         },
         {
           "type": "ALIAS",
@@ -815,6 +963,14 @@
         {
           "type": "SYMBOL",
           "name": "p3"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "a98rgb"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "rec2020"
         },
         {
           "type": "SYMBOL",

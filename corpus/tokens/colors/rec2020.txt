@@ -2,11 +2,11 @@
 
 
 ===
-hsl
+rec2020
 ===
 
 tokens {
-  color primary-red: hsl(360, 100, 100)
+  color primary-red: rec2020(0, 1, 0.5)
 }
 
 ---
@@ -17,10 +17,10 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (hsl
-          (hue_channel)
-          (saturation_channel)
-          (lightness_channel)
+        (rec2020
+          (red_channel)
+          (green_channel)
+          (blue_channel)
         )
       )
     )
@@ -30,12 +30,14 @@ tokens {
 
 
 ===
-hsl - multiline
+rec2020 - multiline
 ===
 
 tokens {
-  color primary-red: hsl(
-    360, 100, 100
+  color primary-red: rec2020(
+    0.25,
+    0.5,
+    0.65
   )
 }
 
@@ -47,10 +49,10 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (hsl
-          (hue_channel)
-          (saturation_channel)
-          (lightness_channel)
+        (rec2020
+          (red_channel)
+          (green_channel)
+          (blue_channel)
         )
       )
     )
@@ -60,11 +62,11 @@ tokens {
 
 
 ===
-hsl - fully opaque
+rec2020 - fully opaque
 ===
 
 tokens {
-  color primary-red: hsl(360, 100, 100, 1)
+  color primary-red: rec2020(0.5, 1, 0.75, 1)
 }
 
 ---
@@ -75,10 +77,10 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (hsl
-          (hue_channel)
-          (saturation_channel)
-          (lightness_channel)
+        (rec2020
+          (red_channel)
+          (green_channel)
+          (blue_channel)
           (alpha_channel)
         )
       )
@@ -89,11 +91,11 @@ tokens {
 
 
 ===
-hsl - translucent
+rec2020 - translucent
 ===
 
 tokens {
-  color primary-red: hsl(360, 100, 100, 0.5)
+  color primary-red: rec2020(1.0, 0.4, 0, 0.5)
 }
 
 ---
@@ -104,10 +106,10 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (hsl
-          (hue_channel)
-          (saturation_channel)
-          (lightness_channel)
+        (rec2020
+          (red_channel)
+          (green_channel)
+          (blue_channel)
           (alpha_channel)
         )
       )
