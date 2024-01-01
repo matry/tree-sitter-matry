@@ -190,6 +190,33 @@
     }
   },
   {
+    "type": "oklch",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "alpha_channel",
+          "named": true
+        },
+        {
+          "type": "chroma_channel",
+          "named": true
+        },
+        {
+          "type": "hue_channel",
+          "named": true
+        },
+        {
+          "type": "lightness_channel",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "p3",
     "named": true,
     "fields": {},
@@ -411,6 +438,10 @@
           "named": true
         },
         {
+          "type": "oklch",
+          "named": true
+        },
+        {
           "type": "p3",
           "named": true
         },
@@ -510,6 +541,10 @@
   },
   {
     "type": "blue_channel",
+    "named": true
+  },
+  {
+    "type": "chroma_channel",
     "named": true
   },
   {

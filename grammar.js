@@ -118,7 +118,7 @@ module.exports = grammar({
     ),
 
     hsv: $ => seq(
-      /hsva?\s*(\()/,
+      /hsv\s*(\()/,
       alias($.number, $.hue_channel),
       ',',
       alias($.number, $.saturation_channel),
@@ -146,12 +146,28 @@ module.exports = grammar({
     number: $ => /-?\d+(\.\d+)?/,
 
     oklab: $ => seq(
-      /oklaba?\s*(\()/,
+      /oklab\s*(\()/,
       alias($.decimal_range, $.lightness_channel),
       ',',
       alias($.decimal_range, $.a_channel),
       ',',
       alias($.decimal_range, $.b_channel),
+      optional(
+        seq(
+          ',',
+          alias($.decimal_range, $.alpha_channel),
+        ),
+      ),
+      ')',
+    ),
+
+    oklch: $ => seq(
+      /oklch\s*(\()/,
+      alias($.decimal_range, $.lightness_channel),
+      ',',
+      alias($.decimal_range, $.chroma_channel),
+      ',',
+      alias($.number, $.hue_channel),
       optional(
         seq(
           ',',
@@ -275,6 +291,7 @@ module.exports = grammar({
       $.a98rgb,
       $.rec2020,
       $.oklab,
+      $.oklch,
       $.dimension,
       $.token_reference,
       $._string,

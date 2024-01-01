@@ -358,7 +358,7 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "hsva?\\s*(\\()"
+          "value": "hsv\\s*(\\()"
         },
         {
           "type": "ALIAS",
@@ -464,7 +464,7 @@
       "members": [
         {
           "type": "PATTERN",
-          "value": "oklaba?\\s*(\\()"
+          "value": "oklab\\s*(\\()"
         },
         {
           "type": "ALIAS",
@@ -500,6 +500,80 @@
           },
           "named": true,
           "value": "b_channel"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": ","
+                },
+                {
+                  "type": "ALIAS",
+                  "content": {
+                    "type": "SYMBOL",
+                    "name": "decimal_range"
+                  },
+                  "named": true,
+                  "value": "alpha_channel"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": ")"
+        }
+      ]
+    },
+    "oklch": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "oklch\\s*(\\()"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "lightness_channel"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "decimal_range"
+          },
+          "named": true,
+          "value": "chroma_channel"
+        },
+        {
+          "type": "STRING",
+          "value": ","
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "SYMBOL",
+            "name": "number"
+          },
+          "named": true,
+          "value": "hue_channel"
         },
         {
           "type": "CHOICE",
@@ -975,6 +1049,10 @@
         {
           "type": "SYMBOL",
           "name": "oklab"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "oklch"
         },
         {
           "type": "SYMBOL",
