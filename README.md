@@ -30,8 +30,13 @@ Documentation for tree-sitter tests can be found [here](https://tree-sitter.gith
 
 ## Building
 
-Matry is intended to be exported as a WASM module.
+Matry is intended to be exported either as a WASM or NodeJS module.
 
+For WASM:
 1. Run the build command: `tree-sitter build-wasm`
 2. You should see a new `tree-sitter-matry.wasm` file in the root directory - do NOT commit this file.
 3. Copy it into your project and use according to general WASM documentation.
+
+For NodeJS:
+1. Run the build command: `npm run build`
+2. Link this repo to your working repo using `npm link`
