@@ -834,3 +834,23 @@ So what does a dialect look like?
 How is it defined?
 
 */
+
+
+
+
+/*
+
+features:
+
+  1. build tree sitter parser
+  2. run cli command to parse current directory
+    a. collect all files in current directory
+    b. parse each one using tree sitter parser
+    c. verify the existence of declared assets
+  3. take the collection of AST's generated from step 2
+    
+
+  - parse tree sitter into object representation
+  - 
+
+*/
