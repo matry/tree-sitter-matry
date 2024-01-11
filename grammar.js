@@ -68,18 +68,45 @@ module.exports = grammar({
       'when',
       $.token_reference,
       choice(
-        $.negative_assertion,
-        $.positive_assertion,
-      ),
-      $.identifier,
-      '{',
-      repeat(
+        // single-line conditionals
         seq(
-          $.token_assignment,
-          $._newlines,
+          choice(
+            $.negative_assertion,
+            $.positive_assertion,
+          ),
+          $.identifier,
+          '{',
+          repeat(
+            seq(
+              $.token_assignment,
+              $._newlines,
+            ),
+          ),
+          '}',
+        ),
+        // multi-line conditionals
+        seq(
+          '{',
+          repeat1(
+            seq(
+              choice(
+                $.negative_assertion,
+                $.positive_assertion,
+              ),
+              $.identifier,
+              '{',
+              repeat(
+                seq(
+                  $.token_assignment,
+                  $._newlines,
+                ),
+              ),
+              '}',
+            ),
+          ),
+          '}',
         ),
       ),
-      '}',
     ),
 
     decimal_range: $ => /(0(\.\d+)?|1(\.0+)?)/,

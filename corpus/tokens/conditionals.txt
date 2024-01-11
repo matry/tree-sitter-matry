@@ -66,3 +66,109 @@ tokens branding {
 )
 
 
+
+====
+multi-line conditional
+====
+
+tokens branding {
+  when $theme {
+    is cherry {
+      primary: #BAD
+    }
+    is tomato {
+      primary: #A55
+    }
+  }
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (conditional_token_block
+      (token_reference
+        (ref_identifier)
+      )
+      (positive_assertion)
+      (identifier)
+      (token_assignment
+        (identifier)
+        (token_value
+          (hex)
+        )
+      )
+      (positive_assertion)
+      (identifier)
+      (token_assignment
+        (identifier)
+        (token_value
+          (hex)
+        )
+      )
+    )
+  )
+)
+
+
+
+====
+multi-line conditional inside a group
+====
+
+tokens branding {
+  colors {
+    color primary: #007
+
+    when $theme {
+      is cherry {
+        primary: #BAD
+      }
+      is tomato {
+        primary: #A55
+      }
+    }
+  }
+}
+
+---
+
+(source_file
+  (tokens_block
+    (identifier)
+    (child_token_block
+      (identifier)
+      (token_declaration
+        (token_type)
+        (identifier)
+        (token_value
+          (hex)
+        )
+      )
+      (conditional_token_block
+        (token_reference
+          (ref_identifier)
+        )
+        (positive_assertion)
+        (identifier)
+        (token_assignment
+          (identifier)
+          (token_value
+            (hex)
+          )
+        )
+        (positive_assertion)
+        (identifier)
+        (token_assignment
+          (identifier)
+          (token_value
+            (hex)
+          )
+        )
+      )
+    )
+  )
+)
+
+
