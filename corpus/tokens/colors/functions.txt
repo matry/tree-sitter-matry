@@ -110,3 +110,37 @@ tokens {
 )
 
 
+
+===
+functions with reference parameters
+===
+
+tokens {
+  color primary-red: hsl(255, 255, 30).mix($some-other-color)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (hsl
+          (hue_channel)
+          (saturation_channel)
+          (lightness_channel)
+        )
+        (color_function_call
+          (color_function_name)
+          (token_reference
+            (ref_identifier)
+          )
+        )
+      )
+    )
+  )
+)
+
+

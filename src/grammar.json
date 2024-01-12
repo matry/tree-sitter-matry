@@ -264,6 +264,10 @@
                   },
                   {
                     "type": "SYMBOL",
+                    "name": "token_reference"
+                  },
+                  {
+                    "type": "SYMBOL",
                     "name": "number"
                   },
                   {

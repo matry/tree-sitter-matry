@@ -112,6 +112,10 @@
         {
           "type": "rgb",
           "named": true
+        },
+        {
+          "type": "token_reference",
+          "named": true
         }
       ]
     }

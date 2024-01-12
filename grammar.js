@@ -87,6 +87,7 @@ module.exports = grammar({
         seq(
           choice(
             $._color_value,
+            $.token_reference,
             $.number,
             $.percent_number,
           ),
