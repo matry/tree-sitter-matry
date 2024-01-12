@@ -108,6 +108,10 @@ tokens {
 tokens {
   asset(svg) logo: /assets/logo.svg
 }
+// forward slash syntax
+tokens {
+  asset/svg logo: /assets/logo.svg
+}
 
 
 // COLOR OPERATIONS
@@ -854,3 +858,40 @@ features:
   - 
 
 */
+
+
+/*
+
+expressions
+
+in the below syntax, each value within an expression becomes an object which has callable functions.
+
+*/
+tokens {
+  color primary: blue.lighten(50%).saturate(20%)
+}
+/*
+easy enough for a color, but how might this work for...a number?
+*/
+tokens {
+  dimension some-value: 123.5.minus(20)
+}
+/*
+I don't like this...do I?
+*/
+
+// traditional alternative with operators
+tokens {
+  dimension some-value: 123.5px - 20px
+}
+
+// nested expressions
+tokens {
+  dimension some-value: (23px - 10px) - 40%
+}
+
+// other values
+tokens {
+  asset some-image: (/assets/background.png).darken(50%)
+  text copy: "hello " + $some-name
+}

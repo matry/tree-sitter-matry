@@ -17,6 +17,21 @@ module.exports = grammar({
       ),
     ),
 
+    _color_value: $ => seq(
+      choice(
+        $.hex,
+        $.rgb,
+        $.hsl,
+        $.hsv,
+        $.p3,
+        $.a98rgb,
+        $.rec2020,
+        $.oklab,
+        $.oklch,
+      ),
+      optional(repeat($.color_function_call)),
+    ),
+
     _newlines: $ => /\n+/,
 
     // This weirdness is necessary so that we don't capture the quotes themselves in the AST
@@ -63,6 +78,30 @@ module.exports = grammar({
       $._token_body,
       '}',
     ),
+
+    color_function_call: $ => seq(
+      '.',
+      $.color_function_name,
+      '(',
+      repeat(
+        seq(
+          choice(
+            $._color_value,
+            $.number,
+            $.percent_number,
+          ),
+          repeat(
+            seq(
+              ',',
+              $._color_value,
+            ),
+          ),
+        ),
+      ),
+      ')',
+    ),
+
+    color_function_name: $ => /[a-zA-Z0-9]+/,
 
     conditional_token_block: $ => seq(
       'when',
@@ -220,6 +259,8 @@ module.exports = grammar({
       ')',
     ),
 
+    percent_number: $ => seq($.number, /%/),
+
     positive_assertion: $ => /is/,
 
     rec2020: $ => seq(
@@ -310,15 +351,7 @@ module.exports = grammar({
     ),
 
     token_value: $ => choice(
-      $.hex,
-      $.rgb,
-      $.hsl,
-      $.hsv,
-      $.p3,
-      $.a98rgb,
-      $.rec2020,
-      $.oklab,
-      $.oklch,
+      $._color_value,
       $.dimension,
       $.token_reference,
       $._string,

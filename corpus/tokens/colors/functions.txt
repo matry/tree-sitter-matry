@@ -1,0 +1,112 @@
+
+
+
+===
+one function
+===
+
+tokens {
+  color primary-red: rgb(255, 255, 30).lighten(30%)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (rgb
+          (red_channel)
+          (green_channel)
+          (blue_channel)
+        )
+        (color_function_call
+          (color_function_name)
+          (percent_number
+            (number)
+          )
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+two chained functions
+===
+
+tokens {
+  color primary-red: rgb(255, 255, 30).lighten(30%).saturate(10%)
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (rgb
+          (red_channel)
+          (green_channel)
+          (blue_channel)
+        )
+        (color_function_call
+          (color_function_name)
+          (percent_number
+            (number)
+          )
+        )
+        (color_function_call
+          (color_function_name)
+          (percent_number
+            (number)
+          )
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+functions with color parameters
+===
+
+tokens {
+  color primary-red: rgb(255, 255, 30).mix(rgb(0, 25, 50))
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (rgb
+          (red_channel)
+          (green_channel)
+          (blue_channel)
+        )
+        (color_function_call
+          (color_function_name)
+          (rgb
+            (red_channel)
+            (green_channel)
+            (blue_channel)
+          )
+        )
+      )
+    )
+  )
+)
+
+
