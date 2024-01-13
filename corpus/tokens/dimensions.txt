@@ -2,11 +2,11 @@
 
 
 ===
-text
+pixel dimension
 ===
 
 tokens {
-  text button-copy: "Click me"
+  dimension font-size: 24px
 }
 
 ---
@@ -17,58 +17,11 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (string)
-      )
-    )
-  )
-)
-
-
-===
-asset
-===
-
-tokens {
-  asset logo: /images/logo.svg
-}
-
----
-
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (asset_path)
-      )
-    )
-  )
-)
-
-
-
-===
-switch
-===
-
-tokens {
-  switch size: small, medium*, large
-}
-
----
-
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (switch
-          (identifier)
-          (identifier)
-          (asterisk)
-          (identifier)
+        (expression
+          (dimension
+            (number)
+            (dimensional_unit)
+          )
         )
       )
     )
@@ -78,38 +31,59 @@ tokens {
 
 
 ===
-switch with one option
+percent dimension
 ===
 
 tokens {
-  switch size: small
-}
-
----
-
-(source_file
-  (ERROR
-    (token_type)
-    (identifier)
-    (identifier)
-  )
-)
-
-
-
-====
-token reference
-====
-
-tokens branding {
-  color secondary-color: $branding.primary
+  dimension shadow-opacity: 75%
 }
 
 ---
 
 (source_file
   (tokens_block
-    (identifier)
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (expression
+          (dimension
+            (number)
+            (dimensional_unit)
+          )
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+dimension calculations
+===
+
+tokens {
+  dimension font-size: 10px
+  dimension large-font-size: $font-size + 5px
+}
+
+---
+
+(source_file
+  (tokens_block
+    (token_declaration
+      (token_type)
+      (identifier)
+      (token_value
+        (expression
+          (dimension
+            (number)
+            (dimensional_unit)
+          )
+        )
+      )
+    )
     (token_declaration
       (token_type)
       (identifier)
@@ -117,6 +91,11 @@ tokens branding {
         (expression
           (token_reference
             (ref_identifier)
+          )
+          (numeric_operator)
+          (dimension
+            (number)
+            (dimensional_unit)
           )
         )
       )

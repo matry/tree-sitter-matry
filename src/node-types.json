@@ -27,6 +27,11 @@
     }
   },
   {
+    "type": "asterisk",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "child_token_block",
     "named": true,
     "fields": {},
@@ -171,6 +176,29 @@
     }
   },
   {
+    "type": "expression",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "dimension",
+          "named": true
+        },
+        {
+          "type": "numeric_operator",
+          "named": true
+        },
+        {
+          "type": "token_reference",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "hex",
     "named": true,
     "fields": {}
@@ -228,6 +256,11 @@
         }
       ]
     }
+  },
+  {
+    "type": "numeric_operator",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "oklab",
@@ -504,7 +537,7 @@
           "named": true
         },
         {
-          "type": "dimension",
+          "type": "expression",
           "named": true
         },
         {
@@ -546,10 +579,6 @@
         {
           "type": "switch",
           "named": true
-        },
-        {
-          "type": "token_reference",
-          "named": true
         }
       ]
     }
@@ -590,6 +619,10 @@
     "named": false
   },
   {
+    "type": "%",
+    "named": false
+  },
+  {
     "type": "(",
     "named": false
   },
@@ -598,11 +631,27 @@
     "named": false
   },
   {
+    "type": "*",
+    "named": false
+  },
+  {
+    "type": "+",
+    "named": false
+  },
+  {
     "type": ",",
     "named": false
   },
   {
+    "type": "-",
+    "named": false
+  },
+  {
     "type": ".",
+    "named": false
+  },
+  {
+    "type": "/",
     "named": false
   },
   {
@@ -623,10 +672,6 @@
   },
   {
     "type": "asset_path",
-    "named": true
-  },
-  {
-    "type": "asterisk",
     "named": true
   },
   {

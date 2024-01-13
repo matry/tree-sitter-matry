@@ -158,6 +158,24 @@ module.exports = grammar({
 
     dimensional_unit: $ => /(px|%|em|rem|in|pt|cm|mm|pc|ch|ex|vw|vh|vmin|vmax|dvh|dvw)/,
 
+    expression: $ => repeat1(
+      seq(
+        choice(
+          $.dimension,
+          $.token_reference,
+        ),
+        optional(
+          seq(
+            $.numeric_operator,
+            choice(
+              $.dimension,
+              $.token_reference,
+            ),
+          ),
+        ),
+      ),
+    ),
+
     hex: $ => seq(
       '#',
       choice(
@@ -211,6 +229,14 @@ module.exports = grammar({
     negative_assertion: $ => /is not/,
 
     number: $ => /-?\d+(\.\d+)?/,
+
+    numeric_operator: $ => choice(
+      '+',
+      '-',
+      '*',
+      '/',
+      '%',
+    ),
 
     oklab: $ => seq(
       /oklab\s*(\()/,
@@ -353,8 +379,7 @@ module.exports = grammar({
 
     token_value: $ => choice(
       $._color_value,
-      $.dimension,
-      $.token_reference,
+      $.expression,
       $._string,
       $.asset_path,
       $.switch,
