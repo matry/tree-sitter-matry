@@ -17,7 +17,9 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (hex)
+        (color_expression
+          (hex)
+        )
       )
     )
   )
@@ -41,7 +43,9 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (hex)
+        (color_expression
+          (hex)
+        )
       )
     )
   )
@@ -65,7 +69,9 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (hex)
+        (color_expression
+          (hex)
+        )
       )
     )
   )
@@ -89,7 +95,9 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (hex)
+        (color_expression
+          (hex)
+        )
       )
     )
     (number)

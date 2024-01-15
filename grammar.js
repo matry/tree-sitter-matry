@@ -17,21 +17,6 @@ module.exports = grammar({
       ),
     ),
 
-    _color_value: $ => seq(
-      choice(
-        $.hex,
-        $.rgb,
-        $.hsl,
-        $.hsv,
-        $.p3,
-        $.a98rgb,
-        $.rec2020,
-        $.oklab,
-        $.oklch,
-      ),
-      optional(repeat($.color_function_call)),
-    ),
-
     _newlines: $ => /\n+/,
 
     // This weirdness is necessary so that we don't capture the quotes themselves in the AST
@@ -79,6 +64,21 @@ module.exports = grammar({
       '}',
     ),
 
+    color_expression: $ => seq(
+      choice(
+        $.hex,
+        $.rgb,
+        $.hsl,
+        $.hsv,
+        $.p3,
+        $.a98rgb,
+        $.rec2020,
+        $.oklab,
+        $.oklch,
+      ),
+      optional(repeat($.color_function_call)),
+    ),
+
     color_function_call: $ => seq(
       '.',
       $.color_function_name,
@@ -86,7 +86,7 @@ module.exports = grammar({
       repeat(
         seq(
           choice(
-            $._color_value,
+            $.color_expression,
             $.token_reference,
             $.number,
             $.percent_number,
@@ -94,7 +94,7 @@ module.exports = grammar({
           repeat(
             seq(
               ',',
-              $._color_value,
+              $.color_expression,
             ),
           ),
         ),
@@ -378,7 +378,7 @@ module.exports = grammar({
     ),
 
     token_value: $ => choice(
-      $._color_value,
+      $.color_expression,
       $.expression,
       $._string,
       $.asset_path,

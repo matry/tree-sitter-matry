@@ -17,7 +17,9 @@ tokens branding {
       (token_type)
       (identifier)
       (token_value
-        (hex)
+        (color_expression
+          (hex)
+        )
       )
     )
   )
@@ -54,7 +56,9 @@ tokens branding {
         (token_type)
         (identifier)
         (token_value
-          (hex)
+          (color_expression
+            (hex)
+          )
         )
       )
     )
@@ -100,7 +104,9 @@ tokens branding {
           (token_type)
           (identifier)
           (token_value
-            (hex)
+            (color_expression
+              (hex)
+            )
           )
         )
       )
@@ -110,7 +116,9 @@ tokens branding {
           (token_type)
           (identifier)
           (token_value
-            (hex)
+            (color_expression
+              (hex)
+            )
           )
         )
       )
@@ -139,21 +147,27 @@ tokens branding {
       (token_type)
       (identifier)
       (token_value
-        (hex)
+        (color_expression
+          (hex)
+        )
       )
     )
     (token_declaration
       (token_type)
       (identifier)
       (token_value
-        (hex)
+        (color_expression
+          (hex)
+        )
       )
     )
     (token_declaration
       (token_type)
       (identifier)
       (token_value
-        (hex)
+        (color_expression
+          (hex)
+        )
       )
     )
   )

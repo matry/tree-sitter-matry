@@ -17,15 +17,17 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (rgb
-          (red_channel)
-          (green_channel)
-          (blue_channel)
-        )
-        (color_function_call
-          (color_function_name)
-          (percent_number
-            (number)
+        (color_expression
+          (rgb
+            (red_channel)
+            (green_channel)
+            (blue_channel)
+          )
+          (color_function_call
+            (color_function_name)
+            (percent_number
+              (number)
+            )
           )
         )
       )
@@ -51,21 +53,23 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (rgb
-          (red_channel)
-          (green_channel)
-          (blue_channel)
-        )
-        (color_function_call
-          (color_function_name)
-          (percent_number
-            (number)
+        (color_expression
+          (rgb
+            (red_channel)
+            (green_channel)
+            (blue_channel)
           )
-        )
-        (color_function_call
-          (color_function_name)
-          (percent_number
-            (number)
+          (color_function_call
+            (color_function_name)
+            (percent_number
+              (number)
+            )
+          )
+          (color_function_call
+            (color_function_name)
+            (percent_number
+              (number)
+            )
           )
         )
       )
@@ -91,17 +95,21 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (rgb
-          (red_channel)
-          (green_channel)
-          (blue_channel)
-        )
-        (color_function_call
-          (color_function_name)
+        (color_expression
           (rgb
             (red_channel)
             (green_channel)
             (blue_channel)
+          )
+          (color_function_call
+            (color_function_name)
+            (color_expression
+              (rgb
+                (red_channel)
+                (green_channel)
+                (blue_channel)
+              )
+            )
           )
         )
       )
@@ -127,15 +135,17 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (hsl
-          (hue_channel)
-          (saturation_channel)
-          (lightness_channel)
-        )
-        (color_function_call
-          (color_function_name)
-          (token_reference
-            (ref_identifier)
+        (color_expression
+          (hsl
+            (hue_channel)
+            (saturation_channel)
+            (lightness_channel)
+          )
+          (color_function_call
+            (color_function_name)
+            (token_reference
+              (ref_identifier)
+            )
           )
         )
       )

@@ -59,7 +59,7 @@
     }
   },
   {
-    "type": "color_function_call",
+    "type": "color_expression",
     "named": true,
     "fields": {},
     "children": {
@@ -75,10 +75,6 @@
           "named": true
         },
         {
-          "type": "color_function_name",
-          "named": true
-        },
-        {
           "type": "hex",
           "named": true
         },
@@ -88,10 +84,6 @@
         },
         {
           "type": "hsv",
-          "named": true
-        },
-        {
-          "type": "number",
           "named": true
         },
         {
@@ -107,15 +99,38 @@
           "named": true
         },
         {
-          "type": "percent_number",
-          "named": true
-        },
-        {
           "type": "rec2020",
           "named": true
         },
         {
           "type": "rgb",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "color_function_call",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "color_expression",
+          "named": true
+        },
+        {
+          "type": "color_function_name",
+          "named": true
+        },
+        {
+          "type": "number",
+          "named": true
+        },
+        {
+          "type": "percent_number",
           "named": true
         },
         {
@@ -521,55 +536,19 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "a98rgb",
-          "named": true
-        },
         {
           "type": "asset_path",
           "named": true
         },
         {
-          "type": "color_function_call",
+          "type": "color_expression",
           "named": true
         },
         {
           "type": "expression",
-          "named": true
-        },
-        {
-          "type": "hex",
-          "named": true
-        },
-        {
-          "type": "hsl",
-          "named": true
-        },
-        {
-          "type": "hsv",
-          "named": true
-        },
-        {
-          "type": "oklab",
-          "named": true
-        },
-        {
-          "type": "oklch",
-          "named": true
-        },
-        {
-          "type": "p3",
-          "named": true
-        },
-        {
-          "type": "rec2020",
-          "named": true
-        },
-        {
-          "type": "rgb",
           "named": true
         },
         {

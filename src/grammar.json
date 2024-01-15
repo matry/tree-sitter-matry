@@ -21,67 +21,6 @@
         ]
       }
     },
-    "_color_value": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "hex"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "rgb"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "hsl"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "hsv"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "p3"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "a98rgb"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "rec2020"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "oklab"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "oklch"
-            }
-          ]
-        },
-        {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "color_function_call"
-              }
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
-        }
-      ]
-    },
     "_newlines": {
       "type": "PATTERN",
       "value": "\\n+"
@@ -235,6 +174,67 @@
         }
       ]
     },
+    "color_expression": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "hex"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "rgb"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "hsl"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "hsv"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "p3"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "a98rgb"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "rec2020"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "oklab"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "oklch"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "REPEAT",
+              "content": {
+                "type": "SYMBOL",
+                "name": "color_function_call"
+              }
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
     "color_function_call": {
       "type": "SEQ",
       "members": [
@@ -260,7 +260,7 @@
                 "members": [
                   {
                     "type": "SYMBOL",
-                    "name": "_color_value"
+                    "name": "color_expression"
                   },
                   {
                     "type": "SYMBOL",
@@ -287,7 +287,7 @@
                     },
                     {
                       "type": "SYMBOL",
-                      "name": "_color_value"
+                      "name": "color_expression"
                     }
                   ]
                 }
@@ -1312,7 +1312,7 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_color_value"
+          "name": "color_expression"
         },
         {
           "type": "SYMBOL",

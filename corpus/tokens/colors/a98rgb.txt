@@ -17,10 +17,12 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (a98rgb
-          (red_channel)
-          (green_channel)
-          (blue_channel)
+        (color_expression
+          (a98rgb
+            (red_channel)
+            (green_channel)
+            (blue_channel)
+          )
         )
       )
     )
@@ -49,10 +51,12 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (a98rgb
-          (red_channel)
-          (green_channel)
-          (blue_channel)
+        (color_expression
+          (a98rgb
+            (red_channel)
+            (green_channel)
+            (blue_channel)
+          )
         )
       )
     )
@@ -77,11 +81,13 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (a98rgb
-          (red_channel)
-          (green_channel)
-          (blue_channel)
-          (alpha_channel)
+        (color_expression
+          (a98rgb
+            (red_channel)
+            (green_channel)
+            (blue_channel)
+            (alpha_channel)
+          )
         )
       )
     )
@@ -106,11 +112,13 @@ tokens {
       (token_type)
       (identifier)
       (token_value
-        (a98rgb
-          (red_channel)
-          (green_channel)
-          (blue_channel)
-          (alpha_channel)
+        (color_expression
+          (a98rgb
+            (red_channel)
+            (green_channel)
+            (blue_channel)
+            (alpha_channel)
+          )
         )
       )
     )

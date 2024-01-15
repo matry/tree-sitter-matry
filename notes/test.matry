@@ -877,7 +877,7 @@ tokens {
   dimension some-value: 123.5.minus(20)
 }
 /*
-I don't like this...do I?
+^ I don't like this...do I?
 */
 
 // traditional alternative with operators
