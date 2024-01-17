@@ -1,0 +1,39 @@
+
+===
+newcolors
+===
+
+tokens brand {
+  color primary-red: rgb(255, 255, 30).lighten(30%)
+}
+
+---
+
+(file
+  (tokens
+    (id)
+    (def
+      (type)
+      (id)
+      (exp
+        (func
+          (func_id)
+          (params
+            (num)
+            (num)
+            (num)
+          )
+        )
+        (func
+          (func_id)
+          (params
+            (dimension
+              (num)
+              (unit)
+            )
+          )
+        )
+      )
+    )
+  )
+)

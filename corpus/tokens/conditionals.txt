@@ -13,21 +13,17 @@ tokens branding {
 
 ---
 
-(source_file
-  (tokens_block
-    (identifier)
-    (conditional_token_block
-      (token_reference
-        (ref_identifier)
-      )
-      (positive_assertion)
-      (identifier)
-      (token_assignment
-        (identifier)
-        (token_value
-          (color_expression
-            (hex)
-          )
+(file
+  (tokens
+    (id)
+    (cond
+      (ref)
+      (pos)
+      (id)
+      (set
+        (id)
+        (exp
+          (hex)
         )
       )
     )
@@ -48,21 +44,17 @@ tokens branding {
 
 ---
 
-(source_file
-  (tokens_block
-    (identifier)
-    (conditional_token_block
-      (token_reference
-        (ref_identifier)
-      )
-      (negative_assertion)
-      (identifier)
-      (token_assignment
-        (identifier)
-        (token_value
-          (color_expression
-            (hex)
-          )
+(file
+  (tokens
+    (id)
+    (cond
+      (ref)
+      (neg)
+      (id)
+      (set
+        (id)
+        (exp
+          (hex)
         )
       )
     )
@@ -88,31 +80,25 @@ tokens branding {
 
 ---
 
-(source_file
-  (tokens_block
-    (identifier)
-    (conditional_token_block
-      (token_reference
-        (ref_identifier)
-      )
-      (positive_assertion)
-      (identifier)
-      (token_assignment
-        (identifier)
-        (token_value
-          (color_expression
-            (hex)
-          )
+(file
+  (tokens
+    (id)
+    (cond
+      (ref)
+      (pos)
+      (id)
+      (set
+        (id)
+        (exp
+          (hex)
         )
       )
-      (positive_assertion)
-      (identifier)
-      (token_assignment
-        (identifier)
-        (token_value
-          (color_expression
-            (hex)
-          )
+      (pos)
+      (id)
+      (set
+        (id)
+        (exp
+          (hex)
         )
       )
     )
@@ -142,42 +128,34 @@ tokens branding {
 
 ---
 
-(source_file
-  (tokens_block
-    (identifier)
-    (child_token_block
-      (identifier)
-      (token_declaration
-        (token_type)
-        (identifier)
-        (token_value
-          (color_expression
+(file
+  (tokens
+    (id)
+    (group
+      (id)
+      (def
+        (type)
+        (id)
+        (exp
+          (hex)
+        )
+      )
+      (cond
+        (ref)
+        (pos)
+        (id)
+        (set
+          (id)
+          (exp
             (hex)
           )
         )
-      )
-      (conditional_token_block
-        (token_reference
-          (ref_identifier)
-        )
-        (positive_assertion)
-        (identifier)
-        (token_assignment
-          (identifier)
-          (token_value
-            (color_expression
-              (hex)
-            )
-          )
-        )
-        (positive_assertion)
-        (identifier)
-        (token_assignment
-          (identifier)
-          (token_value
-            (color_expression
-              (hex)
-            )
+        (pos)
+        (id)
+        (set
+          (id)
+          (exp
+            (hex)
           )
         )
       )

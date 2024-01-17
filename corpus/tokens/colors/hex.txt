@@ -11,15 +11,13 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (hex)
-        )
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (hex)
       )
     )
   )
@@ -37,15 +35,13 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (hex)
-        )
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (hex)
       )
     )
   )
@@ -63,44 +59,15 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (hex)
-        )
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (hex)
       )
     )
-  )
-)
-
-
-
-===
-hex - 10 digits (invalid)
-===
-
-tokens {
-  color primary-red: #BADA55FF00
-}
-
----
-
-(source_file
-  (ERROR
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (hex)
-        )
-      )
-    )
-    (number)
   )
 )
 

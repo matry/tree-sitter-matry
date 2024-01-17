@@ -11,22 +11,26 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (rgb
-            (red_channel)
-            (green_channel)
-            (blue_channel)
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (func
+          (func_id)
+          (params
+            (num)
+            (num)
+            (num)
           )
-          (color_function_call
-            (color_function_name)
-            (percent_number
-              (number)
+        )
+        (func
+          (func_id)
+          (params
+            (dimension
+              (num)
+              (unit)
             )
           )
         )
@@ -47,28 +51,35 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (rgb
-            (red_channel)
-            (green_channel)
-            (blue_channel)
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (func
+          (func_id)
+          (params
+            (num)
+            (num)
+            (num)
           )
-          (color_function_call
-            (color_function_name)
-            (percent_number
-              (number)
+        )
+        (func
+          (func_id)
+          (params
+            (dimension
+              (num)
+              (unit)
             )
           )
-          (color_function_call
-            (color_function_name)
-            (percent_number
-              (number)
+        )
+        (func
+          (func_id)
+          (params
+            (dimension
+              (num)
+              (unit)
             )
           )
         )
@@ -89,25 +100,29 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (rgb
-            (red_channel)
-            (green_channel)
-            (blue_channel)
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (func
+          (func_id)
+          (params
+            (num)
+            (num)
+            (num)
           )
-          (color_function_call
-            (color_function_name)
-            (color_expression
-              (rgb
-                (red_channel)
-                (green_channel)
-                (blue_channel)
+        )
+        (func
+          (func_id)
+          (params
+            (func
+              (func_id)
+              (params
+                (num)
+                (num)
+                (num)
               )
             )
           )
@@ -129,23 +144,24 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (hsl
-            (hue_channel)
-            (saturation_channel)
-            (lightness_channel)
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (func
+          (func_id)
+          (params
+            (num)
+            (num)
+            (num)
           )
-          (color_function_call
-            (color_function_name)
-            (token_reference
-              (ref_identifier)
-            )
+        )
+        (func
+          (func_id)
+          (params
+            (ref)
           )
         )
       )

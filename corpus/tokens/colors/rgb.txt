@@ -11,17 +11,18 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (rgb
-            (red_channel)
-            (green_channel)
-            (blue_channel)
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (func
+          (func_id)
+          (params
+            (num)
+            (num)
+            (num)
           )
         )
       )
@@ -45,17 +46,18 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (rgb
-            (red_channel)
-            (green_channel)
-            (blue_channel)
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (func
+          (func_id)
+          (params
+            (num)
+            (num)
+            (num)
           )
         )
       )
@@ -75,18 +77,19 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (rgb
-            (red_channel)
-            (green_channel)
-            (blue_channel)
-            (alpha_channel)
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (func
+          (func_id)
+          (params
+            (num)
+            (num)
+            (num)
+            (num)
           )
         )
       )
@@ -106,18 +109,19 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (color_expression
-          (rgb
-            (red_channel)
-            (green_channel)
-            (blue_channel)
-            (alpha_channel)
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (func
+          (func_id)
+          (params
+            (num)
+            (num)
+            (num)
+            (num)
           )
         )
       )

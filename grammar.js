@@ -9,116 +9,89 @@ module.exports = grammar({
   */
   rules: {
 
-    source_file: $ => repeat(
+    file: $ => repeat(
       choice(
-        $.tokens_block,
+        $._tokens,
         $.single_line_comment,
         $.multi_line_comment,
       ),
     ),
 
-    _newlines: $ => /\n+/,
-
-    // This weirdness is necessary so that we don't capture the quotes themselves in the AST
-    _string: $ => seq(
-      /"/,
-      $.string,
-      /"/,
+    _tokens: $ => seq(
+      'tokens',
+      alias($.group, $.tokens),
     ),
 
-    _token_body: $ => repeat1(
-      choice(
-        seq(
-          $.token_declaration,
-          $._newlines,
-        ),
-        $.conditional_token_block,
-        $.child_token_block,
-      ),
-    ),
-
-    a98rgb: $ => seq(
-      /a98rgb\s*(\()/,
-      alias($.decimal_range, $.red_channel),
-      ',',
-      alias($.decimal_range, $.green_channel),
-      ',',
-      alias($.decimal_range, $.blue_channel),
-      optional(
-        seq(
-          ',',
-          alias($.decimal_range, $.alpha_channel),
-        ),
-      ),
-      ')',
-    ),
-
-    asset_path: $ => /\/[a-zA-Z0-9\/\._-]+/,
-
-    asterisk: $ => '*',
-
-    child_token_block: $ => seq(
-      $.identifier,
+    group: $ => seq(
+      optional($.id),
       '{',
-      $._token_body,
+      repeat1(
+        choice(
+          $.def,
+          $.group,
+          $.cond,
+        ),
+      ),
       '}',
     ),
 
-    color_expression: $ => seq(
-      choice(
-        $.hex,
-        $.rgb,
-        $.hsl,
-        $.hsv,
-        $.p3,
-        $.a98rgb,
-        $.rec2020,
-        $.oklab,
-        $.oklch,
-      ),
-      optional(repeat($.color_function_call)),
+    def: $ => seq(
+      $.type,
+      $.id,
+      ':',
+      alias($._exp, $.exp),
     ),
 
-    color_function_call: $ => seq(
-      '.',
-      $.color_function_name,
-      '(',
-      repeat(
-        seq(
-          choice(
-            $.color_expression,
-            $.token_reference,
-            $.number,
-            $.percent_number,
-          ),
-          repeat(
-            seq(
-              ',',
-              $.color_expression,
-            ),
-          ),
-        ),
-      ),
-      ')',
+    id: $ => /[a-zA-Z][a-zA-Z0-9_-]+/i,
+
+    type: $ => choice(
+      'text',
+      'color',
+      'asset',
+      'switch',
+      'dimension',
+      'range',
     ),
 
-    color_function_name: $ => /[a-zA-Z0-9]+/,
+    _exp: $ => choice(
+      $.dimension,
+      $.num,
+      $._str,
+      $._func,
+      $.hex,
+      $._ref,
+      $.asset,
+      $.arithmetic,
+    ),
 
-    conditional_token_block: $ => seq(
+    _newlines: $ => /\n+/,
+
+    // This weirdness is necessary so that we don't capture the quotes themselves in the AST
+    _str: $ => seq(
+      /"/,
+      $.str,
+      /"/,
+    ),
+
+    asset: $ => /\/[a-zA-Z0-9\/\._-]+/,
+
+    asterisk: $ => '*',
+
+    cond: $ => seq(
       'when',
-      $.token_reference,
+      $._ref,
       choice(
         // single-line conditionals
         seq(
           choice(
-            $.negative_assertion,
-            $.positive_assertion,
+            $.neg,
+            $.pos,
           ),
-          $.identifier,
+          $.id,
           '{',
           repeat(
             seq(
-              $.token_assignment,
+              $.set,
               $._newlines,
             ),
           ),
@@ -130,14 +103,14 @@ module.exports = grammar({
           repeat1(
             seq(
               choice(
-                $.negative_assertion,
-                $.positive_assertion,
+                $.neg,
+                $.pos,
               ),
-              $.identifier,
+              $.id,
               '{',
               repeat(
                 seq(
-                  $.token_assignment,
+                  $.set,
                   $._newlines,
                 ),
               ),
@@ -152,29 +125,11 @@ module.exports = grammar({
     decimal_range: $ => /(0(\.\d+)?|1(\.0+)?)/,
 
     dimension: $ => seq(
-      $.number,
-      $.dimensional_unit,
+      $.num,
+      $.unit,
     ),
 
-    dimensional_unit: $ => /(px|%|em|rem|in|pt|cm|mm|pc|ch|ex|vw|vh|vmin|vmax|dvh|dvw)/,
-
-    expression: $ => repeat1(
-      seq(
-        choice(
-          $.dimension,
-          $.token_reference,
-        ),
-        optional(
-          seq(
-            $.numeric_operator,
-            choice(
-              $.dimension,
-              $.token_reference,
-            ),
-          ),
-        ),
-      ),
-    ),
+    unit: $ => token.immediate(/(px|%|em|rem|in|pt|cm|mm|pc|ch|ex|vw|vh|vmin|vmax|dvh|dvw|deg|ms|s)/),
 
     hex: $ => seq(
       '#',
@@ -186,51 +141,72 @@ module.exports = grammar({
       ),
     ),
 
-    hsl: $ => seq(
-      /hsl\s*(\()/,
-      alias($.number, $.hue_channel),
-      ',',
-      alias($.number, $.saturation_channel),
-      ',',
-      alias($.number, $.lightness_channel),
-      optional(
-        seq(
-          ',',
-          alias($.decimal_range, $.alpha_channel),
-        ),
-      ),
-      ')',
-    ),
-
-    hsv: $ => seq(
-      /hsv\s*(\()/,
-      alias($.number, $.hue_channel),
-      ',',
-      alias($.number, $.saturation_channel),
-      ',',
-      alias($.number, $.value_channel),
-      optional(
-        seq(
-          ',',
-          alias($.decimal_range, $.alpha_channel),
-        ),
-      ),
-      ')',
-    ),
-
-    identifier: $ => /[a-zA-Z][a-zA-Z0-9_-]+/i,
-
     multi_line_comment: $ => token(seq(
       '/*',
       /[^*]*\*+([^/*][^*]*\*+)*/,
       '/',
     )),
 
-    negative_assertion: $ => /is not/,
+    neg: $ => /is not/,
 
-    number: $ => /-?\d+(\.\d+)?/,
+    num: $ => /-?\d+(\.\d+)?/,
 
-    numeric_operator: $ => choice(
+    arithmetic: $ => seq(
+      choice(
+        $.dimension,
+        $._str,
+        $._func,
+        $.hex,
+        $._ref,
+      ),
+      repeat1(
+        seq(
+          $.op,
+          choice(
+            $.dimension,
+            $._str,
+            $._func,
+            $.hex,
+            $._ref,
+          ),
+        ),
+      ),
+    ),
+
+    func: $ => seq(
+      $.func_id,
+      $.params,
+    ),
+
+    _func: $ => seq(
+      $.func,
+      repeat(
+        seq(
+          '.',
+          $.func,
+        ),
+      ),
+    ),
+
+    func_id: $ => /[a-zA-Z][a-zA-Z0-9]+/,
+
+    params: $ => seq(
+      '(',
+      optional(
+        seq(
+          $._exp,
+          repeat(
+            seq(
+              ',',
+              $._exp,
+            ),
+          ),
+        ),
+      ),
+      ')',
+    ),
+
+    op: $ => choice(
       '+',
       '-',
       '*',
@@ -238,151 +214,37 @@ module.exports = grammar({
       '%',
     ),
 
-    oklab: $ => seq(
-      /oklab\s*(\()/,
-      alias($.decimal_range, $.lightness_channel),
-      ',',
-      alias($.decimal_range, $.a_channel),
-      ',',
-      alias($.decimal_range, $.b_channel),
-      optional(
-        seq(
-          ',',
-          alias($.decimal_range, $.alpha_channel),
-        ),
-      ),
-      ')',
-    ),
+    pos: $ => /is/,
 
-    oklch: $ => seq(
-      /oklch\s*(\()/,
-      alias($.decimal_range, $.lightness_channel),
-      ',',
-      alias($.decimal_range, $.chroma_channel),
-      ',',
-      alias($.number, $.hue_channel),
-      optional(
-        seq(
-          ',',
-          alias($.decimal_range, $.alpha_channel),
-        ),
-      ),
-      ')',
-    ),
-
-    p3: $ => seq(
-      /p3\s*(\()/,
-      alias($.decimal_range, $.red_channel),
-      ',',
-      alias($.decimal_range, $.green_channel),
-      ',',
-      alias($.decimal_range, $.blue_channel),
-      optional(
-        seq(
-          ',',
-          alias($.decimal_range, $.alpha_channel),
-        ),
-      ),
-      ')',
-    ),
-
-    percent_number: $ => seq($.number, /%/),
-
-    positive_assertion: $ => /is/,
-
-    rec2020: $ => seq(
-      /rec2020\s*(\()/,
-      alias($.decimal_range, $.red_channel),
-      ',',
-      alias($.decimal_range, $.green_channel),
-      ',',
-      alias($.decimal_range, $.blue_channel),
-      optional(
-        seq(
-          ',',
-          alias($.decimal_range, $.alpha_channel),
-        ),
-      ),
-      ')',
-    ),
-
-    ref_identifier: $ => /[a-zA-Z][a-zA-Z0-9_.-]+/i,
-
-    rgb: $ => seq(
-      /rgb\s*(\()/,
-      alias($.number, $.red_channel),
-      ',',
-      alias($.number, $.green_channel),
-      ',',
-      alias($.number, $.blue_channel),
-      optional(
-        seq(
-          ',',
-          alias($.decimal_range, $.alpha_channel),
-        ),
-      ),
-      ')',
-    ),
+    ref: $ => /[a-zA-Z][a-zA-Z0-9_.-]+/i,
 
     single_line_comment: $ => token(/\/\/[^\n]*/),
 
-    string: $ => /[^\\n^"]*/,
+    str: $ => /[^\\n^"]*/,
 
     switch: $ => seq(
       seq(
-        $.identifier,
+        $.id,
         optional($.asterisk),
       ),
       repeat1(
         seq(
           ',',
-          $.identifier,
+          $.id,
           optional($.asterisk),
         ),
       ),
     ),
 
-    token_assignment: $ => seq(
-      $.identifier,
+    set: $ => seq(
+      $.id,
       ':',
-      $.token_value,
+      alias($._exp, $.exp),
     ),
 
-    tokens_block: $ => seq(
-      'tokens',
-      optional($.identifier),
-      /\{/,
-      $._token_body,
-      /\}/,
-    ),
-
-    token_declaration: $ => seq(
-      $.token_type,
-      $.identifier,
-      ':',
-      $.token_value,
-    ),
-
-    token_reference: $ => seq(
+    _ref: $ => seq(
       '$',
-      $.ref_identifier,
-    ),
-
-    token_type: $ => choice(
-      'text',
-      'color',
-      'asset',
-      'switch',
-      'dimension',
-      'range',
-    ),
-
-    token_value: $ => choice(
-      $.color_expression,
-      $.expression,
-      $._string,
-      $.asset_path,
-      $.switch,
+      $.ref,
     ),
 
   },

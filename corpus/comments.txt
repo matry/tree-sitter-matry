@@ -7,7 +7,7 @@ single-line comments
 
 ---
 
-(source_file
+(file
   (single_line_comment)
 )
 
@@ -23,6 +23,6 @@ This is a multi-line comment
 
 ---
 
-(source_file
+(file
   (multi_line_comment)
 )

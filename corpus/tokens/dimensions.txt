@@ -11,17 +11,15 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (expression
-          (dimension
-            (number)
-            (dimensional_unit)
-          )
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (dimension
+          (num)
+          (unit)
         )
       )
     )
@@ -40,17 +38,15 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (expression
-          (dimension
-            (number)
-            (dimensional_unit)
-          )
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (dimension
+          (num)
+          (unit)
         )
       )
     )
@@ -70,32 +66,28 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (expression
-          (dimension
-            (number)
-            (dimensional_unit)
-          )
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (dimension
+          (num)
+          (unit)
         )
       )
     )
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (expression
-          (token_reference
-            (ref_identifier)
-          )
-          (numeric_operator)
+    (def
+      (type)
+      (id)
+      (exp
+        (arithmetic
+          (ref)
+          (op)
           (dimension
-            (number)
-            (dimensional_unit)
+            (num)
+            (unit)
           )
         )
       )

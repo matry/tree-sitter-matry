@@ -1,6 +1,6 @@
 [
   {
-    "type": "a98rgb",
+    "type": "arithmetic",
     "named": true,
     "fields": {},
     "children": {
@@ -8,19 +8,27 @@
       "required": true,
       "types": [
         {
-          "type": "alpha_channel",
+          "type": "dimension",
           "named": true
         },
         {
-          "type": "blue_channel",
+          "type": "func",
           "named": true
         },
         {
-          "type": "green_channel",
+          "type": "hex",
           "named": true
         },
         {
-          "type": "red_channel",
+          "type": "op",
+          "named": true
+        },
+        {
+          "type": "ref",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         }
       ]
@@ -32,7 +40,7 @@
     "fields": {}
   },
   {
-    "type": "child_token_block",
+    "type": "cond",
     "named": true,
     "fields": {},
     "children": {
@@ -40,26 +48,30 @@
       "required": true,
       "types": [
         {
-          "type": "child_token_block",
+          "type": "id",
           "named": true
         },
         {
-          "type": "conditional_token_block",
+          "type": "neg",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "pos",
           "named": true
         },
         {
-          "type": "token_declaration",
+          "type": "ref",
+          "named": true
+        },
+        {
+          "type": "set",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "color_expression",
+    "type": "def",
     "named": true,
     "fields": {},
     "children": {
@@ -67,105 +79,15 @@
       "required": true,
       "types": [
         {
-          "type": "a98rgb",
+          "type": "exp",
           "named": true
         },
         {
-          "type": "color_function_call",
+          "type": "id",
           "named": true
         },
         {
-          "type": "hex",
-          "named": true
-        },
-        {
-          "type": "hsl",
-          "named": true
-        },
-        {
-          "type": "hsv",
-          "named": true
-        },
-        {
-          "type": "oklab",
-          "named": true
-        },
-        {
-          "type": "oklch",
-          "named": true
-        },
-        {
-          "type": "p3",
-          "named": true
-        },
-        {
-          "type": "rec2020",
-          "named": true
-        },
-        {
-          "type": "rgb",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "color_function_call",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "color_expression",
-          "named": true
-        },
-        {
-          "type": "color_function_name",
-          "named": true
-        },
-        {
-          "type": "number",
-          "named": true
-        },
-        {
-          "type": "percent_number",
-          "named": true
-        },
-        {
-          "type": "token_reference",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "conditional_token_block",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "negative_assertion",
-          "named": true
-        },
-        {
-          "type": "positive_assertion",
-          "named": true
-        },
-        {
-          "type": "token_assignment",
-          "named": true
-        },
-        {
-          "type": "token_reference",
+          "type": "type",
           "named": true
         }
       ]
@@ -180,255 +102,61 @@
       "required": true,
       "types": [
         {
-          "type": "dimensional_unit",
+          "type": "num",
           "named": true
         },
         {
-          "type": "number",
+          "type": "unit",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "expression",
+    "type": "exp",
     "named": true,
     "fields": {},
     "children": {
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "arithmetic",
+          "named": true
+        },
+        {
+          "type": "asset",
+          "named": true
+        },
         {
           "type": "dimension",
           "named": true
         },
         {
-          "type": "numeric_operator",
+          "type": "func",
           "named": true
         },
         {
-          "type": "token_reference",
+          "type": "hex",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "ref",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "hex",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "hsl",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "alpha_channel",
-          "named": true
-        },
-        {
-          "type": "hue_channel",
-          "named": true
-        },
-        {
-          "type": "lightness_channel",
-          "named": true
-        },
-        {
-          "type": "saturation_channel",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "hsv",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "alpha_channel",
-          "named": true
-        },
-        {
-          "type": "hue_channel",
-          "named": true
-        },
-        {
-          "type": "saturation_channel",
-          "named": true
-        },
-        {
-          "type": "value_channel",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "numeric_operator",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "oklab",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "a_channel",
-          "named": true
-        },
-        {
-          "type": "alpha_channel",
-          "named": true
-        },
-        {
-          "type": "b_channel",
-          "named": true
-        },
-        {
-          "type": "lightness_channel",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "oklch",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "alpha_channel",
-          "named": true
-        },
-        {
-          "type": "chroma_channel",
-          "named": true
-        },
-        {
-          "type": "hue_channel",
-          "named": true
-        },
-        {
-          "type": "lightness_channel",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "p3",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "alpha_channel",
-          "named": true
-        },
-        {
-          "type": "blue_channel",
-          "named": true
-        },
-        {
-          "type": "green_channel",
-          "named": true
-        },
-        {
-          "type": "red_channel",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "percent_number",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "number",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "rec2020",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "alpha_channel",
-          "named": true
-        },
-        {
-          "type": "blue_channel",
-          "named": true
-        },
-        {
-          "type": "green_channel",
-          "named": true
-        },
-        {
-          "type": "red_channel",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "rgb",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "alpha_channel",
-          "named": true
-        },
-        {
-          "type": "blue_channel",
-          "named": true
-        },
-        {
-          "type": "green_channel",
-          "named": true
-        },
-        {
-          "type": "red_channel",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "source_file",
+    "type": "file",
     "named": true,
     "fields": {},
     "children": {
@@ -444,14 +172,14 @@
           "named": true
         },
         {
-          "type": "tokens_block",
+          "type": "tokens",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "switch",
+    "type": "func",
     "named": true,
     "fields": {},
     "children": {
@@ -459,18 +187,18 @@
       "required": true,
       "types": [
         {
-          "type": "asterisk",
+          "type": "func_id",
           "named": true
         },
         {
-          "type": "identifier",
+          "type": "params",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "token_assignment",
+    "type": "group",
     "named": true,
     "fields": {},
     "children": {
@@ -478,92 +206,79 @@
       "required": true,
       "types": [
         {
-          "type": "identifier",
+          "type": "cond",
           "named": true
         },
         {
-          "type": "token_value",
+          "type": "def",
+          "named": true
+        },
+        {
+          "type": "group",
+          "named": true
+        },
+        {
+          "type": "id",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "token_declaration",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "token_type",
-          "named": true
-        },
-        {
-          "type": "token_value",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "token_reference",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "ref_identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "token_type",
+    "type": "hex",
     "named": true,
     "fields": {}
   },
   {
-    "type": "token_value",
+    "type": "op",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "params",
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
-      "required": true,
+      "multiple": true,
+      "required": false,
       "types": [
         {
-          "type": "asset_path",
+          "type": "arithmetic",
           "named": true
         },
         {
-          "type": "color_expression",
+          "type": "asset",
           "named": true
         },
         {
-          "type": "expression",
+          "type": "dimension",
           "named": true
         },
         {
-          "type": "string",
+          "type": "func",
           "named": true
         },
         {
-          "type": "switch",
+          "type": "hex",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "ref",
+          "named": true
+        },
+        {
+          "type": "str",
           "named": true
         }
       ]
     }
   },
   {
-    "type": "tokens_block",
+    "type": "set",
     "named": true,
     "fields": {},
     "children": {
@@ -571,23 +286,47 @@
       "required": true,
       "types": [
         {
-          "type": "child_token_block",
+          "type": "exp",
           "named": true
         },
         {
-          "type": "conditional_token_block",
-          "named": true
-        },
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "token_declaration",
+          "type": "id",
           "named": true
         }
       ]
     }
+  },
+  {
+    "type": "tokens",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "cond",
+          "named": true
+        },
+        {
+          "type": "def",
+          "named": true
+        },
+        {
+          "type": "group",
+          "named": true
+        },
+        {
+          "type": "id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "#",
@@ -638,11 +377,7 @@
     "named": false
   },
   {
-    "type": "a_channel",
-    "named": true
-  },
-  {
-    "type": "alpha_channel",
+    "type": "asset",
     "named": true
   },
   {
@@ -650,51 +385,19 @@
     "named": false
   },
   {
-    "type": "asset_path",
-    "named": true
-  },
-  {
-    "type": "b_channel",
-    "named": true
-  },
-  {
-    "type": "blue_channel",
-    "named": true
-  },
-  {
-    "type": "chroma_channel",
-    "named": true
-  },
-  {
     "type": "color",
     "named": false
-  },
-  {
-    "type": "color_function_name",
-    "named": true
   },
   {
     "type": "dimension",
     "named": false
   },
   {
-    "type": "dimensional_unit",
+    "type": "func_id",
     "named": true
   },
   {
-    "type": "green_channel",
-    "named": true
-  },
-  {
-    "type": "hue_channel",
-    "named": true
-  },
-  {
-    "type": "identifier",
-    "named": true
-  },
-  {
-    "type": "lightness_channel",
+    "type": "id",
     "named": true
   },
   {
@@ -702,15 +405,15 @@
     "named": true
   },
   {
-    "type": "negative_assertion",
+    "type": "neg",
     "named": true
   },
   {
-    "type": "number",
+    "type": "num",
     "named": true
   },
   {
-    "type": "positive_assertion",
+    "type": "pos",
     "named": true
   },
   {
@@ -718,15 +421,7 @@
     "named": false
   },
   {
-    "type": "red_channel",
-    "named": true
-  },
-  {
-    "type": "ref_identifier",
-    "named": true
-  },
-  {
-    "type": "saturation_channel",
+    "type": "ref",
     "named": true
   },
   {
@@ -734,7 +429,7 @@
     "named": true
   },
   {
-    "type": "string",
+    "type": "str",
     "named": true
   },
   {
@@ -750,7 +445,7 @@
     "named": false
   },
   {
-    "type": "value_channel",
+    "type": "unit",
     "named": true
   },
   {

@@ -11,13 +11,13 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (string)
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (str)
       )
     )
   )
@@ -34,64 +34,15 @@ tokens {
 
 ---
 
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (asset_path)
+(file
+  (tokens
+    (def
+      (type)
+      (id)
+      (exp
+        (asset)
       )
     )
-  )
-)
-
-
-
-===
-switch
-===
-
-tokens {
-  switch size: small, medium*, large
-}
-
----
-
-(source_file
-  (tokens_block
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (switch
-          (identifier)
-          (identifier)
-          (asterisk)
-          (identifier)
-        )
-      )
-    )
-  )
-)
-
-
-
-===
-switch with one option
-===
-
-tokens {
-  switch size: small
-}
-
----
-
-(source_file
-  (ERROR
-    (token_type)
-    (identifier)
-    (identifier)
   )
 )
 
@@ -107,18 +58,14 @@ tokens branding {
 
 ---
 
-(source_file
-  (tokens_block
-    (identifier)
-    (token_declaration
-      (token_type)
-      (identifier)
-      (token_value
-        (expression
-          (token_reference
-            (ref_identifier)
-          )
-        )
+(file
+  (tokens
+    (id)
+    (def
+      (type)
+      (id)
+      (exp
+        (ref)
       )
     )
   )
