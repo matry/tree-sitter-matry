@@ -22,7 +22,7 @@ To update the syntax...
 
 ## Testing the parser
 
-All tests are located in `/corpus`.
+All tests are located in `/test/corpus`.
 Documentation for tree-sitter tests can be found [here](https://tree-sitter.github.io/tree-sitter/creating-parsers#command-test).
 
 1. Run the tests: `tree-sitter test`
