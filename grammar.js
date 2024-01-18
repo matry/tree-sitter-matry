@@ -12,6 +12,7 @@ module.exports = grammar({
     file: $ => repeat(
       choice(
         $._tokens,
+        $.variants,
         $.single_line_comment,
         $.multi_line_comment,
       ),
@@ -19,16 +20,43 @@ module.exports = grammar({
 
     _tokens: $ => seq(
       'tokens',
-      alias($.group, $.tokens),
+      alias($.block, $.tokens),
     ),
 
-    group: $ => seq(
+    variants: $ => seq(
+      'variants',
+      '{',
+      repeat1(
+        $.var,
+      ),
+      '}',
+    ),
+
+    var: $ => seq(
+      $.type,
+      $.id,
+      ':',
+      $.base,
+    ),
+
+    base: $ => choice(
+      $.dimension,
+      $.num,
+      $._str,
+      $.func,
+      $.hex,
+      $._ref,
+      $.asset,
+      $.switch,
+    ),
+
+    block: $ => seq(
       optional($.id),
       '{',
       repeat1(
         choice(
           $.def,
-          $.group,
+          $.block,
           $.cond,
         ),
       ),

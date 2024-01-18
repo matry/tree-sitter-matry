@@ -1,0 +1,79 @@
+
+
+
+===
+switch
+===
+
+variants {
+  switch size: small, medium*, large
+}
+
+---
+
+(file
+  (variants
+    (var
+      (type)
+      (id)
+      (base
+        (switch
+          (id)
+          (id)
+          (asterisk)
+          (id)
+        )
+      )
+    )
+  )
+)
+
+
+
+===
+color
+===
+
+variants {
+  color root: #007BFF
+}
+
+---
+
+(file
+  (variants
+    (var
+      (type)
+      (id)
+      (base
+        (hex)
+      )
+    )
+  )
+)
+
+
+
+===
+asset
+===
+
+variants {
+  asset hero-image: /assets/hero-image.png
+}
+
+---
+
+(file
+  (variants
+    (var
+      (type)
+      (id)
+      (base
+        (asset)
+      )
+    )
+  )
+)
+
+

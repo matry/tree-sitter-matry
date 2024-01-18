@@ -108,7 +108,7 @@ tokens branding {
 
 
 ====
-multi-line conditional inside a group
+multi-line conditional inside a block
 ====
 
 tokens branding {
@@ -131,7 +131,7 @@ tokens branding {
 (file
   (tokens
     (id)
-    (group
+    (block
       (id)
       (def
         (type)

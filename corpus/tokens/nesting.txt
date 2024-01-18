@@ -49,7 +49,7 @@ tokens branding {
         (str)
       )
     )
-    (group
+    (block
       (id)
       (def
         (type)
@@ -93,9 +93,9 @@ tokens branding {
         (str)
       )
     )
-    (group
+    (block
       (id)
-      (group
+      (block
         (id)
         (def
           (type)
@@ -105,7 +105,7 @@ tokens branding {
           )
         )
       )
-      (group
+      (block
         (id)
         (def
           (type)

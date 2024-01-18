@@ -12,6 +12,10 @@
           },
           {
             "type": "SYMBOL",
+            "name": "variants"
+          },
+          {
+            "type": "SYMBOL",
             "name": "single_line_comment"
           },
           {
@@ -32,14 +36,96 @@
           "type": "ALIAS",
           "content": {
             "type": "SYMBOL",
-            "name": "group"
+            "name": "block"
           },
           "named": true,
           "value": "tokens"
         }
       ]
     },
-    "group": {
+    "variants": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "variants"
+        },
+        {
+          "type": "STRING",
+          "value": "{"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SYMBOL",
+            "name": "var"
+          }
+        },
+        {
+          "type": "STRING",
+          "value": "}"
+        }
+      ]
+    },
+    "var": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "id"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "base"
+        }
+      ]
+    },
+    "base": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "dimension"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "num"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_str"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "func"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "hex"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_ref"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "asset"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "switch"
+        }
+      ]
+    },
+    "block": {
       "type": "SEQ",
       "members": [
         {
@@ -69,7 +155,7 @@
               },
               {
                 "type": "SYMBOL",
-                "name": "group"
+                "name": "block"
               },
               {
                 "type": "SYMBOL",
