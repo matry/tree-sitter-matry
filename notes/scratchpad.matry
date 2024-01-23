@@ -895,3 +895,150 @@ tokens {
   asset some-image: (/assets/background.png).darken(50%)
   text copy: "hello " + $some-name
 }
+
+// asset collections
+tokens {
+  asset some-image {
+    type: png
+    source: /assets/background.png
+  }
+}
+
+bundle my-font {
+  source: /assets/fonts/helvetica/
+}
+
+// what about variant combinators?
+variants {
+  switch theme: lavender*, rosemary
+  switch mode: dark-mode, light-mode*
+}
+tokens brand {
+  color root: #123
+
+  when $theme, $mode {
+    is lavender and dark-mode {
+      root: #abc
+    }
+    is rosemary and light-mode {
+      root: #007
+    }
+  }
+}
+
+// combinatorial boolean expressions
+tokens brand {
+  color root: #000
+
+  when ($theme is lavender) and ($mode is light-mode) {
+    root: #111
+  }
+}
+
+// nested boolean expressions
+tokens brand {
+  color root: #000
+
+  when $theme {
+    is lavender {
+      when $mode {
+        is light-mode {
+          root: #111
+        }
+        is dark-mode {
+          root: #222
+        }
+      }
+    }
+
+    is lavender {
+      when $mode {
+        is light-mode {
+          root: #333
+        }
+        is dark-mode {
+          root: #444
+        }
+      }
+    }
+  }
+}
+
+// terse variation
+tokens brand {
+  color root: #000
+
+  $theme:lavender {
+    root: #111
+  }
+
+  // I like how simple this is, but what about negation?
+  $theme:lavender & $mode:light-mode {
+    root: #222
+  }
+
+  // maybe a ! to specify negation:
+  $theme:lavender & $mode!dark-mode {
+    root: #222
+  }
+  // the problem with ! is that it's a programming convention, not a design convention
+}
+
+// maybe forward slash?
+tokens brand {
+  color root: #000
+
+  $theme/lavender {
+    root: #111
+  }
+}
+
+// nested variation
+tokens brand {
+  color root: #000
+
+  $theme {
+    lavender {
+      $mode {
+        light-mode {
+          root: #111
+        }
+      }
+    }
+  }
+}
+
+// per-attribute variation
+tokens brand {
+  dimension font-size: 12px
+
+  color root when {
+    $theme is lavender and $mode is light-mode: #000
+    else: #007
+  }
+}
+
+// maybe we can separate assertion definition & usage?
+variants {
+  switch theme: rosemary, lavender*, mint
+  switch mode: dark, light*
+  toggle dark-rosemary: (mode is dark) and (theme is rosemary)
+}
+
+tokens {
+  color primary: #000
+
+  when $dark-rosemary {
+    primary: #111
+  }
+}
+
+/*
+
+^ ugh, this approach requires more naming.
+But I can't deny that it's quite nice.
+One benefit here is that the user could force-override the boolean value.
+Although, a negative is that when the user is presented with these options,
+they'd see all of them, even if technically the `dark-rosemary` should be "private".
+
+*/
