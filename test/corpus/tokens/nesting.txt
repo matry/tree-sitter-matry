@@ -12,10 +12,10 @@ tokens branding {
 
 (file
   (tokens
-    (id)
+    (block_id)
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (hex)
       )
@@ -41,19 +41,19 @@ tokens branding {
 
 (file
   (tokens
-    (id)
+    (block_id)
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (str)
       )
     )
     (block
-      (id)
+      (block_id)
       (def
         (type)
-        (id)
+        (def_id)
         (exp
           (hex)
         )
@@ -85,31 +85,31 @@ tokens branding {
 
 (file
   (tokens
-    (id)
+    (block_id)
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (str)
       )
     )
     (block
-      (id)
+      (block_id)
       (block
-        (id)
+        (block_id)
         (def
           (type)
-          (id)
+          (def_id)
           (exp
             (hex)
           )
         )
       )
       (block
-        (id)
+        (block_id)
         (def
           (type)
-          (id)
+          (def_id)
           (exp
             (hex)
           )
@@ -135,24 +135,24 @@ tokens branding {
 
 (file
   (tokens
-    (id)
+    (block_id)
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (hex)
       )
     )
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (hex)
       )
     )
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (hex)
       )

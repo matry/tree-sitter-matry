@@ -15,7 +15,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (func
           (func_id)
@@ -55,7 +55,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (func
           (func_id)
@@ -104,7 +104,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (func
           (func_id)
@@ -148,7 +148,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (func
           (func_id)

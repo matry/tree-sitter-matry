@@ -15,15 +15,19 @@ tokens branding {
 
 (file
   (tokens
-    (id)
+    (block_id)
     (cond
       (ref)
-      (pos)
-      (id)
-      (set
-        (id)
-        (exp
-          (hex)
+      (assertion
+        (bool
+          (pos)
+          (id)
+        )
+        (set
+          (set_id)
+          (exp
+            (hex)
+          )
         )
       )
     )
@@ -46,15 +50,19 @@ tokens branding {
 
 (file
   (tokens
-    (id)
+    (block_id)
     (cond
       (ref)
-      (neg)
-      (id)
-      (set
-        (id)
-        (exp
-          (hex)
+      (assertion
+        (bool
+          (neg)
+          (id)
+        )
+        (set
+          (set_id)
+          (exp
+            (hex)
+          )
         )
       )
     )
@@ -82,23 +90,31 @@ tokens branding {
 
 (file
   (tokens
-    (id)
+    (block_id)
     (cond
       (ref)
-      (pos)
-      (id)
-      (set
-        (id)
-        (exp
-          (hex)
+      (assertion
+        (bool
+          (pos)
+          (id)
+        )
+        (set
+          (set_id)
+          (exp
+            (hex)
+          )
         )
       )
-      (pos)
-      (id)
-      (set
-        (id)
-        (exp
-          (hex)
+      (assertion
+        (bool
+          (pos)
+          (id)
+        )
+        (set
+          (set_id)
+          (exp
+            (hex)
+          )
         )
       )
     )
@@ -130,32 +146,40 @@ tokens branding {
 
 (file
   (tokens
-    (id)
+    (block_id)
     (block
-      (id)
+      (block_id)
       (def
         (type)
-        (id)
+        (def_id)
         (exp
           (hex)
         )
       )
       (cond
         (ref)
-        (pos)
-        (id)
-        (set
-          (id)
-          (exp
-            (hex)
+        (assertion
+          (bool
+            (pos)
+            (id)
+          )
+          (set
+            (set_id)
+            (exp
+              (hex)
+            )
           )
         )
-        (pos)
-        (id)
-        (set
-          (id)
-          (exp
-            (hex)
+        (assertion
+          (bool
+            (pos)
+            (id)
+          )
+          (set
+            (set_id)
+            (exp
+              (hex)
+            )
           )
         )
       )

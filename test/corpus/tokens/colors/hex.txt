@@ -15,7 +15,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (hex)
       )
@@ -39,7 +39,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (hex)
       )
@@ -63,7 +63,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (hex)
       )

@@ -35,6 +35,25 @@
     }
   },
   {
+    "type": "assertion",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "bool",
+          "named": true
+        },
+        {
+          "type": "set",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "asterisk",
     "named": true,
     "fields": {}
@@ -95,22 +114,22 @@
           "named": true
         },
         {
+          "type": "block_id",
+          "named": true
+        },
+        {
           "type": "cond",
           "named": true
         },
         {
           "type": "def",
           "named": true
-        },
-        {
-          "type": "id",
-          "named": true
         }
       ]
     }
   },
   {
-    "type": "cond",
+    "type": "bool",
     "named": true,
     "fields": {},
     "children": {
@@ -128,13 +147,24 @@
         {
           "type": "pos",
           "named": true
-        },
+        }
+      ]
+    }
+  },
+  {
+    "type": "cond",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
         {
-          "type": "ref",
+          "type": "assertion",
           "named": true
         },
         {
-          "type": "set",
+          "type": "ref",
           "named": true
         }
       ]
@@ -149,11 +179,11 @@
       "required": true,
       "types": [
         {
-          "type": "exp",
+          "type": "def_id",
           "named": true
         },
         {
-          "type": "id",
+          "type": "exp",
           "named": true
         },
         {
@@ -337,7 +367,7 @@
           "named": true
         },
         {
-          "type": "id",
+          "type": "set_id",
           "named": true
         }
       ]
@@ -375,15 +405,15 @@
           "named": true
         },
         {
+          "type": "block_id",
+          "named": true
+        },
+        {
           "type": "cond",
           "named": true
         },
         {
           "type": "def",
-          "named": true
-        },
-        {
-          "type": "id",
           "named": true
         }
       ]
@@ -489,8 +519,16 @@
     "named": false
   },
   {
+    "type": "block_id",
+    "named": true
+  },
+  {
     "type": "color",
     "named": false
+  },
+  {
+    "type": "def_id",
+    "named": true
   },
   {
     "type": "dimension",
@@ -526,6 +564,10 @@
   },
   {
     "type": "ref",
+    "named": true
+  },
+  {
+    "type": "set_id",
     "named": true
   },
   {

@@ -15,7 +15,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (str)
       )
@@ -38,7 +38,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (asset)
       )
@@ -60,10 +60,10 @@ tokens branding {
 
 (file
   (tokens
-    (id)
+    (block_id)
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (ref)
       )

@@ -15,7 +15,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (dimension
           (num)
@@ -42,7 +42,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (dimension
           (num)
@@ -70,7 +70,7 @@ tokens {
   (tokens
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (dimension
           (num)
@@ -80,7 +80,7 @@ tokens {
     )
     (def
       (type)
-      (id)
+      (def_id)
       (exp
         (arithmetic
           (ref)

@@ -51,7 +51,9 @@ module.exports = grammar({
     ),
 
     block: $ => seq(
-      optional($.id),
+      optional(
+        alias($.id, $.block_id),
+      ),
       '{',
       repeat1(
         choice(
@@ -65,7 +67,7 @@ module.exports = grammar({
 
     def: $ => seq(
       $.type,
-      $.id,
+      alias($.id, $.def_id),
       ':',
       alias($._exp, $.exp),
     ),
@@ -105,48 +107,36 @@ module.exports = grammar({
 
     asterisk: $ => '*',
 
+    bool: $ => seq(
+      choice(
+        $.neg,
+        $.pos,
+      ),
+      $.id,
+    ),
+
+    assertion: $ => seq(
+      $.bool,
+      '{',
+      repeat1(
+        seq(
+          $.set,
+          $._newlines,
+        ),
+      ),
+      '}',
+    ),
+
     cond: $ => seq(
       'when',
       $._ref,
       choice(
-        // single-line conditionals
-        seq(
-          choice(
-            $.neg,
-            $.pos,
-          ),
-          $.id,
-          '{',
-          repeat(
-            seq(
-              $.set,
-              $._newlines,
-            ),
-          ),
-          '}',
-        ),
-        // multi-line conditionals
         seq(
           '{',
-          repeat1(
-            seq(
-              choice(
-                $.neg,
-                $.pos,
-              ),
-              $.id,
-              '{',
-              repeat(
-                seq(
-                  $.set,
-                  $._newlines,
-                ),
-              ),
-              '}',
-            ),
-          ),
+          repeat1($.assertion),
           '}',
         ),
+        $.assertion,
       ),
     ),
 
@@ -265,7 +255,7 @@ module.exports = grammar({
     ),
 
     set: $ => seq(
-      $.id,
+      alias($.id, $.set_id),
       ':',
       alias($._exp, $.exp),
     ),
