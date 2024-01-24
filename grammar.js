@@ -11,11 +11,42 @@ module.exports = grammar({
 
     file: $ => repeat(
       choice(
+        $.config,
         $._tokens,
         $.variants,
         $.single_line_comment,
         $.multi_line_comment,
       ),
+    ),
+
+    config: $ => seq(
+      'config',
+      '{',
+      repeat(
+        choice(
+          $.config_def,
+          $.config_block,
+        ),
+      ),
+      '}',
+    ),
+
+    config_def: $ => seq(
+      $.id,
+      ':',
+      choice(
+        $._str,
+        $.num,
+      ),
+    ),
+
+    config_block: $ => seq(
+      $.id,
+      '{',
+      repeat(
+        $.config_def,
+      ),
+      '}',
     ),
 
     _tokens: $ => seq(

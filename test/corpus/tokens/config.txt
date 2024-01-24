@@ -1,0 +1,65 @@
+
+
+
+===
+shallow config
+===
+
+config {
+  some-key: "some-value-str"
+  some-num: 123
+}
+
+---
+
+(file
+  (config
+    (config_def
+      (id)
+      (str)
+    )
+    (config_def
+      (id)
+      (num)
+    )
+  )
+)
+
+
+
+===
+deep config
+===
+
+config {
+  some-key: "some-value-str"
+  some-num: 123
+
+  nested-group {
+    abc: "123"
+  }
+}
+
+---
+
+(file
+  (config
+    (config_def
+      (id)
+      (str)
+    )
+    (config_def
+      (id)
+      (num)
+    )
+    (config_block
+      (id)
+      (config_def
+        (id)
+        (str)
+      )
+    )
+  )
+)
+
+

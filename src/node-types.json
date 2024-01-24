@@ -171,6 +171,67 @@
     }
   },
   {
+    "type": "config",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "config_block",
+          "named": true
+        },
+        {
+          "type": "config_def",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "config_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "config_def",
+          "named": true
+        },
+        {
+          "type": "id",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "config_def",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "id",
+          "named": true
+        },
+        {
+          "type": "num",
+          "named": true
+        },
+        {
+          "type": "str",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "def",
     "named": true,
     "fields": {},
@@ -263,6 +324,10 @@
       "multiple": true,
       "required": false,
       "types": [
+        {
+          "type": "config",
+          "named": true
+        },
         {
           "type": "multi_line_comment",
           "named": true
@@ -512,11 +577,11 @@
   },
   {
     "type": "asset",
-    "named": true
+    "named": false
   },
   {
     "type": "asset",
-    "named": false
+    "named": true
   },
   {
     "type": "block_id",
@@ -524,6 +589,10 @@
   },
   {
     "type": "color",
+    "named": false
+  },
+  {
+    "type": "config",
     "named": false
   },
   {
