@@ -19,55 +19,24 @@ module.exports = grammar({
       ),
     ),
 
-    config: $ => seq(
-      'config',
-      '{',
+    _func: $ => seq(
+      $.func,
       repeat(
-        choice(
-          $.config_def,
-          $.config_block,
+        seq(
+          '.',
+          $.func,
         ),
       ),
-      '}',
     ),
 
-    config_def: $ => seq(
-      $.id,
-      ':',
-      choice(
-        $._str,
-        $.num,
-      ),
-    ),
-
-    config_block: $ => seq(
-      $.id,
-      '{',
-      repeat(
-        $.config_def,
-      ),
-      '}',
+    _ref: $ => seq(
+      '$',
+      $.ref,
     ),
 
     _tokens: $ => seq(
       'tokens',
       alias($.block, $.tokens),
-    ),
-
-    variants: $ => seq(
-      'variants',
-      '{',
-      repeat1(
-        $.var,
-      ),
-      '}',
-    ),
-
-    var: $ => seq(
-      $.type,
-      $.id,
-      ':',
-      $.base,
     ),
 
     base: $ => choice(
@@ -96,6 +65,36 @@ module.exports = grammar({
       '}',
     ),
 
+    config: $ => seq(
+      'config',
+      '{',
+      repeat(
+        choice(
+          $.config_def,
+          $.config_block,
+        ),
+      ),
+      '}',
+    ),
+
+    config_block: $ => seq(
+      $.id,
+      '{',
+      repeat(
+        $.config_def,
+      ),
+      '}',
+    ),
+
+    config_def: $ => seq(
+      $.id,
+      ':',
+      choice(
+        $._str,
+        $.num,
+      ),
+    ),
+
     def: $ => seq(
       $.type,
       alias($.id, $.def_id),
@@ -104,15 +103,6 @@ module.exports = grammar({
     ),
 
     id: $ => /[a-zA-Z][a-zA-Z0-9_-]+/i,
-
-    type: $ => choice(
-      'text',
-      'color',
-      'asset',
-      'switch',
-      'dimension',
-      'range',
-    ),
 
     _exp: $ => choice(
       $.dimension,
@@ -132,6 +122,28 @@ module.exports = grammar({
       /"/,
       $.str,
       /"/,
+    ),
+
+    arithmetic: $ => seq(
+      choice(
+        $.dimension,
+        $._str,
+        $._func,
+        $.hex,
+        $._ref,
+      ),
+      repeat1(
+        seq(
+          $.op,
+          choice(
+            $.dimension,
+            $._str,
+            $._func,
+            $.hex,
+            $._ref,
+          ),
+        ),
+      ),
     ),
 
     asset: $ => /\/[a-zA-Z0-9\/\._-]+/,
@@ -178,7 +190,12 @@ module.exports = grammar({
       $.unit,
     ),
 
-    unit: $ => token.immediate(/(px|%|em|rem|in|pt|cm|mm|pc|ch|ex|vw|vh|vmin|vmax|dvh|dvw|deg|ms|s)/),
+    func: $ => seq(
+      $.func_id,
+      $.params,
+    ),
+
+    func_id: $ => /[a-zA-Z][a-zA-Z0-9]+/,
 
     hex: $ => seq(
       '#',
@@ -200,44 +217,13 @@ module.exports = grammar({
 
     num: $ => /-?\d+(\.\d+)?/,
 
-    arithmetic: $ => seq(
-      choice(
-        $.dimension,
-        $._str,
-        $._func,
-        $.hex,
-        $._ref,
-      ),
-      repeat1(
-        seq(
-          $.op,
-          choice(
-            $.dimension,
-            $._str,
-            $._func,
-            $.hex,
-            $._ref,
-          ),
-        ),
-      ),
+    op: $ => choice(
+      '+',
+      '-',
+      '*',
+      '/',
+      '%',
     ),
-
-    func: $ => seq(
-      $.func_id,
-      $.params,
-    ),
-
-    _func: $ => seq(
-      $.func,
-      repeat(
-        seq(
-          '.',
-          $.func,
-        ),
-      ),
-    ),
-
-    func_id: $ => /[a-zA-Z][a-zA-Z0-9]+/,
 
     params: $ => seq(
       '(',
@@ -255,17 +241,15 @@ module.exports = grammar({
       ')',
     ),
 
-    op: $ => choice(
-      '+',
-      '-',
-      '*',
-      '/',
-      '%',
-    ),
-
     pos: $ => /is/,
 
     ref: $ => /[a-zA-Z][a-zA-Z0-9_.-]+/i,
+
+    set: $ => seq(
+      alias($.id, $.set_id),
+      ':',
+      alias($._exp, $.exp),
+    ),
 
     single_line_comment: $ => token(/\/\/[^\n]*/),
 
@@ -285,15 +269,31 @@ module.exports = grammar({
       ),
     ),
 
-    set: $ => seq(
-      alias($.id, $.set_id),
-      ':',
-      alias($._exp, $.exp),
+    type: $ => choice(
+      'text',
+      'color',
+      'asset',
+      'switch',
+      'dimension',
+      'range',
     ),
 
-    _ref: $ => seq(
-      '$',
-      $.ref,
+    unit: $ => token.immediate(/(px|%|em|rem|in|pt|cm|mm|pc|ch|ex|vw|vh|vmin|vmax|dvh|dvw|deg|ms|s)/),
+
+    var: $ => seq(
+      $.type,
+      $.id,
+      ':',
+      $.base,
+    ),
+
+    variants: $ => seq(
+      'variants',
+      '{',
+      repeat1(
+        $.var,
+      ),
+      '}',
     ),
 
   },
